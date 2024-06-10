@@ -16,7 +16,7 @@ namespace ProjectTDS.Unit
             _rigibody = GetComponent<Rigidbody>();
             _controls = GetComponent<BaseUnitInputComponent>();
             _move = GetComponent<UnitMoveComponent>();
-            _condition = GetComponent<UnitConditionComponent>();
+            _condition = GetComponent<UnitConditionComponent>();        
         }
     }
 }

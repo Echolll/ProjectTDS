@@ -5,10 +5,17 @@ using UnityEngine;
 namespace ProjectTDS.Unit.Player
 {
     public class PlayerMoveComponent : UnitMoveComponent
-    { 
+    {
+        PlayerInputComponent input;
+
+        private void Start()
+        {
+            input = (PlayerInputComponent)Owner._controls; 
+        }
+
         protected override void Update()
         {
-            ref Vector2 position = ref Owner._controls.GetMousePosition;
+            ref Vector2 position = ref input.GetMousePosition;
             Ray ray = Camera.main.ScreenPointToRay(position);
             Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
             float rayDistance;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IWeapon
 {
-    public void OnRelaodingWeapon();
+    float Damage { get; set; }
 
-    public void OnShoot();
+    public void OnAction();
 }

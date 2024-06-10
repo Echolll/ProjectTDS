@@ -57,6 +57,15 @@ namespace ProjectTDS.Unit.Player
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""ReloadWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""8bf3ac6d-7f7f-4019-aa25-94b1871fa8ae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""FirstWeapon"",
                     ""type"": ""Button"",
                     ""id"": ""90245189-1077-48ee-9a86-066dd26557c6"",
@@ -234,6 +243,17 @@ namespace ProjectTDS.Unit.Player
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f73a721-d4cb-439a-972d-1dcf9d8d28e6"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReloadWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -273,6 +293,7 @@ namespace ProjectTDS.Unit.Player
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_MainAction = m_Player.FindAction("MainAction", throwIfNotFound: true);
             m_Player_MeleeAttack = m_Player.FindAction("MeleeAttack", throwIfNotFound: true);
+            m_Player_ReloadWeapon = m_Player.FindAction("ReloadWeapon", throwIfNotFound: true);
             m_Player_FirstWeapon = m_Player.FindAction("FirstWeapon", throwIfNotFound: true);
             m_Player_SecondWeapon = m_Player.FindAction("SecondWeapon", throwIfNotFound: true);
             m_Player_ThirdWeapon = m_Player.FindAction("ThirdWeapon", throwIfNotFound: true);
@@ -345,6 +366,7 @@ namespace ProjectTDS.Unit.Player
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_MainAction;
         private readonly InputAction m_Player_MeleeAttack;
+        private readonly InputAction m_Player_ReloadWeapon;
         private readonly InputAction m_Player_FirstWeapon;
         private readonly InputAction m_Player_SecondWeapon;
         private readonly InputAction m_Player_ThirdWeapon;
@@ -357,6 +379,7 @@ namespace ProjectTDS.Unit.Player
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @MainAction => m_Wrapper.m_Player_MainAction;
             public InputAction @MeleeAttack => m_Wrapper.m_Player_MeleeAttack;
+            public InputAction @ReloadWeapon => m_Wrapper.m_Player_ReloadWeapon;
             public InputAction @FirstWeapon => m_Wrapper.m_Player_FirstWeapon;
             public InputAction @SecondWeapon => m_Wrapper.m_Player_SecondWeapon;
             public InputAction @ThirdWeapon => m_Wrapper.m_Player_ThirdWeapon;
@@ -380,6 +403,9 @@ namespace ProjectTDS.Unit.Player
                 @MeleeAttack.started += instance.OnMeleeAttack;
                 @MeleeAttack.performed += instance.OnMeleeAttack;
                 @MeleeAttack.canceled += instance.OnMeleeAttack;
+                @ReloadWeapon.started += instance.OnReloadWeapon;
+                @ReloadWeapon.performed += instance.OnReloadWeapon;
+                @ReloadWeapon.canceled += instance.OnReloadWeapon;
                 @FirstWeapon.started += instance.OnFirstWeapon;
                 @FirstWeapon.performed += instance.OnFirstWeapon;
                 @FirstWeapon.canceled += instance.OnFirstWeapon;
@@ -408,6 +434,9 @@ namespace ProjectTDS.Unit.Player
                 @MeleeAttack.started -= instance.OnMeleeAttack;
                 @MeleeAttack.performed -= instance.OnMeleeAttack;
                 @MeleeAttack.canceled -= instance.OnMeleeAttack;
+                @ReloadWeapon.started -= instance.OnReloadWeapon;
+                @ReloadWeapon.performed -= instance.OnReloadWeapon;
+                @ReloadWeapon.canceled -= instance.OnReloadWeapon;
                 @FirstWeapon.started -= instance.OnFirstWeapon;
                 @FirstWeapon.performed -= instance.OnFirstWeapon;
                 @FirstWeapon.canceled -= instance.OnFirstWeapon;
@@ -491,6 +520,7 @@ namespace ProjectTDS.Unit.Player
             void OnMove(InputAction.CallbackContext context);
             void OnMainAction(InputAction.CallbackContext context);
             void OnMeleeAttack(InputAction.CallbackContext context);
+            void OnReloadWeapon(InputAction.CallbackContext context);
             void OnFirstWeapon(InputAction.CallbackContext context);
             void OnSecondWeapon(InputAction.CallbackContext context);
             void OnThirdWeapon(InputAction.CallbackContext context);

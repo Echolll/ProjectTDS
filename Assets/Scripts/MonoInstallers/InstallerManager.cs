@@ -1,5 +1,4 @@
-using ProjectTDS.Unit.Player;
-using UnityEngine;
+using ProjectTDS.Unit.Player.Input;
 using Zenject;
 
 namespace ProjectTDS.Managers
@@ -8,7 +7,8 @@ namespace ProjectTDS.Managers
     {
         public override void InstallBindings()
         {
-            Container.BindInstance(new PlayerInputs()).AsSingle();
+            Container.BindInstance(new PlayerInputHandler()).AsSingle();
+            Container.BindInstance(new PlayerActionHandler()).AsSingle();                 
         }
     }
 }

@@ -11,9 +11,5 @@ namespace ProjectTDS.Unit
         protected Vector3 _movement;
 
         public ref Vector3 MoveDirection => ref _movement;
-
-        protected Vector2 _mousePosition; //Костыль
-
-        public ref Vector2 GetMousePosition => ref _mousePosition; //Костыль
     }
 }
