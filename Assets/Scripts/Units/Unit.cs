@@ -10,13 +10,15 @@ namespace ProjectTDS.Unit
         protected internal BaseUnitInputComponent _controls;
         protected internal UnitMoveComponent _move;
         protected internal UnitConditionComponent _condition;
+        protected internal BaseSelectWeaponComponent _weapon;
 
-        protected virtual void Awake()
+        protected void Awake()
         {
             _rigibody = GetComponent<Rigidbody>();
             _controls = GetComponent<BaseUnitInputComponent>();
             _move = GetComponent<UnitMoveComponent>();
-            _condition = GetComponent<UnitConditionComponent>();        
+            _condition = GetComponent<UnitConditionComponent>();   
+            _weapon = GetComponent<BaseSelectWeaponComponent>();
         }
     }
 }

@@ -19,6 +19,7 @@ namespace ProjectTDS.Unit.Player
 
         private void FixedUpdate()
         {
+            if (_target == null) return; // todo
             Vector3 targetPosition = _target.transform.position;
             Vector3 desiredPosition = new Vector3(targetPosition.x, 0, targetPosition.z);
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed * Time.deltaTime);

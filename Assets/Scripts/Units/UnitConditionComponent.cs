@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace ProjectTDS.Unit
 {
-    public class UnitConditionComponent : MonoBehaviour , ICanBeHit
+    public class UnitConditionComponent : UnitComponent, ICanBeHit
     {
-        [SerializeField, Range(0f, 100f)]
+        [Header("Характеристики:"), SerializeField, Range(0f, 100f)]
         private float _maxHealthPoints = 100f;
         [SerializeField, Range(0f, 200f)]
         private float _maxArmorPoints = 25f;
         [SerializeField, Range(0f, 5f)]
         private float _moveSpeed = 3f;
 
-        [Space,SerializeField]
+        [Header("Debug:"), Space,SerializeField]
         protected float _currentHealthPoints;
         [SerializeField]
         protected float _currentArmorPoints;
@@ -28,15 +28,38 @@ namespace ProjectTDS.Unit
 
         public void OnHealthGetDamage(float damagePoints)
         {
-            if (_currentHealthPoints > 0)
+            if(_currentArmorPoints > 0)
+            {
+                if(_currentArmorPoints >= damagePoints)
+                {
+                    _currentArmorPoints -= damagePoints;
+                    return;
+                }
+                else
+                {
+                    float damageToHealth = damagePoints - _currentArmorPoints;
+                    _currentArmorPoints = 0;
+                    _currentHealthPoints -= damageToHealth;
+                }
+            }
+            else
             {
                 _currentHealthPoints -= damagePoints;
-                Debug.Log($"Я ранен! Здоровье: {_currentHealthPoints}");
             }
-            else if (_currentHealthPoints < 0)
-            {
-                Debug.Log("Я уничтожен");
-            }
+
+            if (_currentHealthPoints <= 0) StartCoroutine(OnDied_Coroutine());
+        }
+
+        private IEnumerator OnDied_Coroutine()
+        {
+            OnDeathChanged();
+            yield return new WaitForSeconds(3f);
+            Destroy(gameObject);
+        }
+
+        protected virtual void OnDeathChanged()
+        {
+            Owner._rigibody.freezeRotation = false;
         }
     }
 }

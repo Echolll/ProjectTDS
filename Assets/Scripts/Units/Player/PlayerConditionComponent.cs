@@ -16,6 +16,13 @@ namespace ProjectTDS.Unit.Player
         {
             _currentHealthPoints += repairPoints;
         }
+
+        protected override void OnDeathChanged()
+        {
+            PlayerInputComponent input = Owner._controls as PlayerInputComponent;
+            input.enabled = false;
+            base.OnDeathChanged();
+        }
     }
 }
 

@@ -1,15 +1,16 @@
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 namespace ProjectTDS.Unit.Player.Input
 {
     public class PlayerActionHandler
     {
-        public void MainAction(PlayerUnitComponent player) => player._weapon._firearm.OnAction();
+        public void MainAction(PlayerSelectWeaponComponent _weapon) => _weapon._firearm.OnAction();
         
-        public void ReloadAction(PlayerUnitComponent player) => player._weapon._firearm.Relaod();
+        public void ReloadAction(PlayerSelectWeaponComponent _weapon) => _weapon._firearm.Relaod();
 
-        public void ChangeWeaponInArms(PlayerUnitComponent player, int index) => player._weapon.OnSelectWeapon(index);      
+        public void ChangeWeaponInArms(PlayerSelectWeaponComponent _weapon, int index) => _weapon.OnSelectWeapon(index);      
         
-        public void MeleeAction(PlayerUnitComponent player) => player._weapon._meleeWeapon.OnAction();
+        public void MeleeAction(PlayerSelectWeaponComponent _weapon) => _weapon._meleeWeapon.OnAction();
     }
 }
