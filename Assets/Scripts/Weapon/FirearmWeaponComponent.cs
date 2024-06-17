@@ -53,6 +53,8 @@ namespace ProjectTDS.Weapons
             RaycastHit hit;
             Vector3 hitPoint = _muzzlePosition.position + _muzzlePosition.forward * _fireRange;
 
+            Debug.DrawRay(_muzzlePosition.position, _muzzlePosition.forward, Color.green, 5f);
+
             if (Physics.Raycast(_muzzlePosition.position, _muzzlePosition.forward, out hit, _fireRange))
             {
                 hitPoint = hit.point;
