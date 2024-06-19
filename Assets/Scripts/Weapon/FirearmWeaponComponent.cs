@@ -22,10 +22,8 @@ namespace ProjectTDS.Weapons
         [SerializeField]
         private ParticleSystem _muzzleFlash;
         
-        [Space,SerializeField]
-        private TrailRenderer _trailRenderer;
-        [SerializeField]
-        private float trailDuration = 0.05f;
+        [Space, SerializeField]
+        private BulletComponent _bulletPrefab;
 
         [Space,SerializeField]
         private int _currentAmmo;
@@ -50,22 +48,9 @@ namespace ProjectTDS.Weapons
 
             _currentAmmo--;
 
-            RaycastHit hit;
-            Vector3 hitPoint = _muzzlePosition.position + _muzzlePosition.forward * _fireRange;
-
-            Debug.DrawRay(_muzzlePosition.position, _muzzlePosition.forward, Color.green, 5f);
-
-            if (Physics.Raycast(_muzzlePosition.position, _muzzlePosition.forward, out hit, _fireRange))
-            {
-                hitPoint = hit.point;
-
-                if (hit.transform.TryGetComponent(out ICanBeHit health))
-                {
-                    health.OnHealthGetDamage(Damage);
-                }
-            }
-
-            StartCoroutine(SpawnBulletTrail(_muzzlePosition.position, hitPoint));
+            BulletComponent bullet = Instantiate(_bulletPrefab, _muzzlePosition.position, _muzzlePosition.rotation);
+            bullet.Initialize(Damage);
+            bullet.AddForceToBullet(_fireRange);
         }
 
         public void Relaod()
@@ -83,23 +68,6 @@ namespace ProjectTDS.Weapons
 
             _currentAmmo = _maxAmmo;
             _isRealoding = false;
-        }
-
-        private IEnumerator SpawnBulletTrail(Vector3 startPos, Vector3 endPos)
-        {
-            TrailRenderer trail = Instantiate(_trailRenderer, startPos, Quaternion.identity);
-            
-            float elapsedTime = 0f;
-
-            while (elapsedTime < trailDuration)
-            {
-                trail.transform.position = Vector3.Lerp(startPos, endPos, elapsedTime / trailDuration);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            trail.transform.position = endPos;
-            Destroy(trail.gameObject, trail.time);
-        }
+        }        
     }
 }

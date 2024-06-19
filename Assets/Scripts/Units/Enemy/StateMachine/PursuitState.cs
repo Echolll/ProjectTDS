@@ -1,5 +1,6 @@
 using ProjectTDS.Unit.Player;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace ProjectTDS.Unit.Enemy.StateMachine
@@ -35,6 +36,9 @@ namespace ProjectTDS.Unit.Enemy.StateMachine
             }
 
             if (_unit.EnemyFOV.Player == null) OnLostPlayer();
+
+            if (Vector3.Distance(_unit.transform.position, _playerUnit.transform.position) > _unit.FireDistance) 
+                _unit.StateMachine.ChangeState(_unit.ShootState);
         }   
         
         private async void OnLostPlayer()

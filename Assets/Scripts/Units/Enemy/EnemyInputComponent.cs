@@ -20,6 +20,7 @@ namespace ProjectTDS.Unit.Enemy
 
         public IdleState IdleState;
         public PursuitState PursuitState;
+        public ShootState ShootState;
 
         [SerializeField]
         private Vector3[] _patrollingPoints;
@@ -34,6 +35,9 @@ namespace ProjectTDS.Unit.Enemy
         [field : SerializeField, Range(3, 5), Space]
         public float LossPlayerDuration { get; private set; }
 
+        [field: SerializeField, Range(3, 10), Space]
+        public float FireDistance { get; private set; }
+
         protected override void Awake()
         {
             base.Awake();
@@ -46,6 +50,7 @@ namespace ProjectTDS.Unit.Enemy
             _stateMachine = new StateMachine.StateMachine();
             IdleState = new IdleState(this, _agent);
             PursuitState = new PursuitState(this, _agent);
+            ShootState = new ShootState(this, _agent, Owner as EnemyUnitComponent);
 
             _stateMachine.Initialize(IdleState);
         }
