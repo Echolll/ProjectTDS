@@ -36,9 +36,7 @@ namespace ProjectTDS.Unit.Enemy.StateMachine
 
         public override void Update() 
         {
-            float distanceToPlayer = Vector3.Distance(_inputUnit.transform.position, _playerUnit.transform.position);
-
-            if (distanceToPlayer > _inputUnit.FireDistance || !_inputUnit.EnemyFOV.CanSeePlayer)
+            if (!_inputUnit.EnemyFOV.CanSeePlayer)
             {
                 _inputUnit.StateMachine.ChangeState(_inputUnit.PursuitState);
             }

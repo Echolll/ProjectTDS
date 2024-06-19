@@ -35,9 +35,11 @@ namespace ProjectTDS.Unit.Enemy.StateMachine
                 _agent.SetDestination(_playerUnit.transform.position);
             }
 
-            if (_unit.EnemyFOV.Player == null) OnLostPlayer();
+            if (!_unit.EnemyFOV.CanSeePlayer) OnLostPlayer();
 
-            if (Vector3.Distance(_unit.transform.position, _playerUnit.transform.position) > _unit.FireDistance) 
+            float distanceToPlayer = Vector3.Distance(_unit.transform.position, _playerUnit.transform.position);
+
+            if (distanceToPlayer < _unit.FireDistance) 
                 _unit.StateMachine.ChangeState(_unit.ShootState);
         }   
         
