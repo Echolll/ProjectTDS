@@ -20,7 +20,8 @@ namespace ProjectTDS.Unit.Enemy.StateMachine
 
         public override void Enter()
         {
-            _playerUnit = _unit.EnemyFOV.Player;
+            if(_unit.EnemyFOV.CanSeePlayer) _playerUnit = _unit.EnemyFOV.Player;
+            else _unit.StateMachine.ChangeState(_unit.IdleState);
         }
 
         public override void Exit() 

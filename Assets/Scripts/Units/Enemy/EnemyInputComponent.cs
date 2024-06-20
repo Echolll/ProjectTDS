@@ -57,8 +57,7 @@ namespace ProjectTDS.Unit.Enemy
 
         private void Update()
         {
-            _stateMachine.CurrentState.Update();
-            Debug.Log($"Текущее состояние: {_stateMachine.CurrentState}");
+            _stateMachine.CurrentState.Update();          
         }
 
         #region EDITOR

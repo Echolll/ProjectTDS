@@ -53,6 +53,7 @@ namespace ProjectTDS.Unit.Enemy.StateMachine
                 if (!_agent.isStopped)
                     _agent.isStopped = true;
 
+                if (_playerUnit == null) return;
                 _enemyUnit.transform.LookAt(_playerUnit.transform.position);
 
                 firearmWeapon._weapon.OnAction();
