@@ -36,7 +36,8 @@ namespace ProjectTDS.Unit.Player
         private void FixedUpdate()
         {
             ref Vector3 movement = ref Owner._controls.MoveDirection;
-            Owner._rigibody.AddForce(movement * Owner._condition.MoveSpeed / Time.deltaTime);       
+            Owner._rigibody.AddForce(movement * Owner._condition.MoveSpeed / Time.deltaTime);
+            UpdateAnimationStates(movement);
         }
     }
 }

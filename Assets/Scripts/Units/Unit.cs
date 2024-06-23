@@ -7,6 +7,7 @@ namespace ProjectTDS.Unit
     public class Unit : MonoBehaviour
     {
         protected internal Rigidbody _rigibody;
+        protected internal Animator _animator;
         protected internal BaseUnitInputComponent _controls;
         protected internal UnitMoveComponent _move;
         protected internal UnitConditionComponent _condition;
@@ -19,6 +20,7 @@ namespace ProjectTDS.Unit
             _move = GetComponent<UnitMoveComponent>();
             _condition = GetComponent<UnitConditionComponent>();   
             _weapon = GetComponent<BaseSelectWeaponComponent>();
+            _animator = GetComponent<Animator>();
         }
     }
 }

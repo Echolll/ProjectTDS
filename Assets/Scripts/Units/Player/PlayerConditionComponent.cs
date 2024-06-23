@@ -21,6 +21,7 @@ namespace ProjectTDS.Unit.Player
         {
             PlayerInputComponent input = Owner._controls as PlayerInputComponent;
             input.enabled = false;
+            Owner._animator.SetTrigger("OnDeath");
             base.OnDeathChanged();
         }
     }

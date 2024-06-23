@@ -57,7 +57,8 @@ namespace ProjectTDS.Unit.Enemy
 
         private void Update()
         {
-            _stateMachine.CurrentState.Update();          
+            _stateMachine.CurrentState.Update();
+            Owner._move.UpdateAnimationStates(_agent.velocity);
         }
 
         #region EDITOR

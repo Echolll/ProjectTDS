@@ -9,8 +9,8 @@ namespace ProjectTDS.Unit.Player.Input
         
         public void ReloadAction(PlayerSelectWeaponComponent _weapon) => _weapon._firearm.Relaod();
 
-        public void ChangeWeaponInArms(PlayerSelectWeaponComponent _weapon, int index) => _weapon.OnSelectWeapon(index);      
-        
-        public void MeleeAction(PlayerSelectWeaponComponent _weapon) => _weapon._meleeWeapon.OnAction();
+        public void ChangeWeaponInArms(PlayerSelectWeaponComponent _weapon, int index) => _weapon.OnSelectWeapon(index);
+
+        public void MeleeAction(PlayerSelectWeaponComponent _weapon) => _weapon.MeleeAction();
     }
 }
