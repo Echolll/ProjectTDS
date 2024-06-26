@@ -1,11 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using ProjectTDS.Managers;
 using UnityEngine;
+using Zenject;
 
 namespace ProjectTDS.Unit
 {
     public class Unit : MonoBehaviour
     {
+        [Inject]
+        protected internal LevelManager _level;
+
         protected internal Rigidbody _rigibody;
         protected internal Animator _animator;
         protected internal BaseUnitInputComponent _controls;
@@ -15,10 +18,10 @@ namespace ProjectTDS.Unit
 
         protected void Awake()
         {
+            _condition = GetComponent<UnitConditionComponent>();
             _rigibody = GetComponent<Rigidbody>();
             _controls = GetComponent<BaseUnitInputComponent>();
-            _move = GetComponent<UnitMoveComponent>();
-            _condition = GetComponent<UnitConditionComponent>();   
+            _move = GetComponent<UnitMoveComponent>();    
             _weapon = GetComponent<BaseSelectWeaponComponent>();
             _animator = GetComponent<Animator>();
         }

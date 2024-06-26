@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,23 +7,36 @@ namespace ProjectTDS.Unit.Player
 {
     public class PlayerConditionComponent : UnitConditionComponent, IRepairHealth, IRepairArmor
     {
+        public event Action PlayerDeathEventHandler;
+        public event Action UpdateConditionDataEventHandler;
+
+        private bool _isDead = false;
+
         public void OnArmorRepair(float repairPoints)
         {
             _currentArmorPoints += repairPoints;
-            Debug.Log($"Броня:{_currentArmorPoints}");
+            UpdateConditionDataEventHandler?.Invoke();
         }
 
         public void OnHealthRepair(float repairPoints)
         {
             _currentHealthPoints += repairPoints;
+            UpdateConditionDataEventHandler?.Invoke();
         }
 
-        protected override void OnDeathChanged()
+        public override void OnHealthGetDamage(float damagePoints)
         {
-            PlayerInputComponent input = Owner._controls as PlayerInputComponent;
-            input.enabled = false;
-            Owner._animator.SetTrigger("OnDeath");
-            base.OnDeathChanged();
+            base.OnHealthGetDamage(damagePoints);
+            UpdateConditionDataEventHandler?.Invoke();
+        }
+
+        protected override void OnDied()
+        {
+            if(_isDead) return;
+            _isDead = true;
+            Owner._controls.enabled = false;
+            base.OnDied();
+            PlayerDeathEventHandler?.Invoke();
         }
     }
 }

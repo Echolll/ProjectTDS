@@ -27,6 +27,7 @@ namespace ProjectTDS.Weapons
 
         [Space,SerializeField]
         private int _currentAmmo;
+
         private bool _isRealoding = false;
         private float _nextTimeToFire = 0f;
 
@@ -39,7 +40,7 @@ namespace ProjectTDS.Weapons
 
         public override void OnAction()
         {         
-            if (_isRealoding || Time.time < _nextTimeToFire) return;
+            if (_isRealoding || Time.time < _nextTimeToFire || !gameObject.activeSelf) return;
             if (_currentAmmo <= 0) Relaod();
 
             _nextTimeToFire = Time.time + _fireRate;
@@ -50,7 +51,7 @@ namespace ProjectTDS.Weapons
 
             BulletComponent bullet = Instantiate(_bulletPrefab, _muzzlePosition.position, _muzzlePosition.rotation);
             bullet.Initialize(Damage);
-            bullet.AddForceToBullet(_fireRange);
+            bullet.AddForceToBullet(_fireRange / 1.5f);
         }
 
         public void Relaod()

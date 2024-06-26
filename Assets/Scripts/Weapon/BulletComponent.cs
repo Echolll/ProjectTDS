@@ -9,9 +9,12 @@ namespace ProjectTDS.Weapons
 
         private void OnEnable() => _rigibodyBullet = GetComponent<Rigidbody>();
 
+        private float _bulletLifeTime = 15f;
+
         public void Initialize(float damage)
         {
             _damage = damage;
+            Destroy(gameObject, _bulletLifeTime);
         }
 
         public void AddForceToBullet(float force)

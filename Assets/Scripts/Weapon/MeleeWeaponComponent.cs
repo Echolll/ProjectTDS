@@ -6,39 +6,30 @@ namespace ProjectTDS.Weapons
 {
     public class MeleeWeaponComponent : BaseWeaponComponent
     {
-        private Collider _attackCollider;
+        [SerializeField, Range (1f,5f)]
+        private float _delayBetweenAttack = 2f;
 
-        private bool _isAttacking = false;
-
-        private void Start()
-        {
-            _attackCollider = GetComponent<Collider>();
-            _attackCollider.enabled = false;
-        }
+        public bool IsAttacking { get; private set; }
 
         public override void OnAction()
         {
-            if (_isAttacking) return;
-            StartCoroutine(AttackCoroutine());
+            if (IsAttacking) return;
+            IsAttacking = true;
+            StartCoroutine(OnAttackEnd());
         }
 
-        private IEnumerator AttackCoroutine()
+        private IEnumerator OnAttackEnd()
         {
-            _isAttacking = true;
-            _attackCollider.enabled = true;
-            
-            yield return new WaitForSeconds(0.1f);
-          
-            _attackCollider.enabled = false;
-            _isAttacking = false;
-        }
+            yield return new WaitForSeconds(_delayBetweenAttack);
+            IsAttacking = false;
+        }    
 
         private void OnTriggerEnter(Collider other)
         {
-            if(_isAttacking && other.TryGetComponent(out ICanBeHit health))
+            if(other.TryGetComponent(out ICanBeHit health))
             {
                 health.OnHealthGetDamage(Damage);
             }
-        }
+        }       
     }
 }

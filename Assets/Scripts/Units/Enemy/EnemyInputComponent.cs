@@ -22,6 +22,8 @@ namespace ProjectTDS.Unit.Enemy
         public PursuitState PursuitState;
         public ShootState ShootState;
 
+        //todo ^
+
         [SerializeField]
         private Vector3[] _patrollingPoints;
 

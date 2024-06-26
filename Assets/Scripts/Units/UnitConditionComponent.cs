@@ -18,15 +18,17 @@ namespace ProjectTDS.Unit
         [SerializeField]
         protected float _currentArmorPoints;
 
-        public float MoveSpeed => _moveSpeed;
-       
+        public float MoveSpeed { get => _moveSpeed;}
+        public float ArmorPoints { get => _currentArmorPoints; }
+        public float HealthPoints { get => _currentHealthPoints; }
+
         private void Start()
         {
             _currentHealthPoints = _maxHealthPoints;
             _currentArmorPoints = _maxArmorPoints;         
         }
 
-        public void OnHealthGetDamage(float damagePoints)
+        public virtual void OnHealthGetDamage(float damagePoints)
         {
             if(_currentArmorPoints > 0)
             {
@@ -47,19 +49,20 @@ namespace ProjectTDS.Unit
                 _currentHealthPoints -= damagePoints;
             }
 
-            if (_currentHealthPoints <= 0) StartCoroutine(OnDied_Coroutine());
+            if (_currentHealthPoints <= 0) OnDied();  //StartCoroutine(OnDied_Coroutine());
         }
 
-        private IEnumerator OnDied_Coroutine()
+        protected virtual void OnDied()
         {
-            OnDeathChanged();
-            yield return new WaitForSeconds(3f);
-            Destroy(gameObject);
+            var animator = Owner._animator;
+            SetAllAnimatorLayersToZero(animator);
+            animator.SetTrigger("OnDeath");
+            Owner._rigibody.freezeRotation = false;            
         }
 
-        protected virtual void OnDeathChanged()
+        private void SetAllAnimatorLayersToZero(Animator animator)
         {
-            Owner._rigibody.freezeRotation = false;
+            for (int i = 0; i < animator.layerCount; i++) animator.SetLayerWeight(i, 0);
         }
     }
 }

@@ -60,7 +60,7 @@ namespace ProjectTDS.Unit.Enemy.StateMachine
             }
             else if (_enemyUnit._weapon is EnemyMeleeWeaponSetComponent meleeWeapon)
             {
-                meleeWeapon._weapon.OnAction();
+                meleeWeapon.MeleeAttack();
             }
         }
     }

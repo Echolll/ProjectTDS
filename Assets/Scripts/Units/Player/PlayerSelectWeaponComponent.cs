@@ -10,7 +10,7 @@ namespace ProjectTDS.Unit.Player
     public class PlayerSelectWeaponComponent : BaseSelectWeaponComponent
     {
         [SerializeField]
-        private BaseWeaponComponent _currentMelee;
+        private MeleeWeaponComponent _currentMelee;
 
         [Space,SerializeField]
         private BaseWeaponComponent[] _weapons;
@@ -66,23 +66,25 @@ namespace ProjectTDS.Unit.Player
         }
 
         public void MeleeAction()
-        {            
-            var anim = Owner._animator;
-            StartCoroutine(MeleeActionDo(_weaponKeyAnim[_currentMelee], anim));               
-        }
-
-        private IEnumerator MeleeActionDo(int layerKey, Animator anim)
         {
-            _currentWeapon.gameObject.SetActive(false);
+            if (_currentMelee.IsAttacking) return;
             _currentMelee.gameObject.SetActive(true);
+            _currentWeapon.gameObject.SetActive(false);
 
-            anim.SetLayerWeight(layerKey, 0.5f);
-            anim.SetTrigger("MeleeAction");
-            yield return new WaitForSeconds(2f);
-
-            anim.SetLayerWeight(layerKey, 0f);
-            _currentWeapon.gameObject.SetActive(true);
-            _currentMelee.gameObject.SetActive(false);
+            _currentMelee.OnAction();
+            
+            Owner._animator.SetTrigger("MeleeAction");
+            Owner._animator.SetLayerWeight(_weaponKeyAnim[_currentMelee], 0.5f);                   
+        }
+     
+        public void OnChangeAnimationWeight_UnityEvent(AnimationEvent data)
+        {
+            Owner._animator.SetLayerWeight(_weaponKeyAnim[_currentMelee], data.floatParameter);     
+            if(data.floatParameter == 0f)
+            {
+                _currentMelee.gameObject.SetActive(false);
+                _currentWeapon.gameObject.SetActive(true);        
+            }
         }
     }
 }

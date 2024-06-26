@@ -16,6 +16,6 @@ namespace ProjectTDS.Weapons
 
         public float Damage { get => _damage; set => _damage = value; }
 
-        public abstract void OnAction();
+        public abstract void OnAction();      
     }
 }

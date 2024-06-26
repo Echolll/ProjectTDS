@@ -13,6 +13,6 @@ namespace ProjectTDS.Unit
         protected virtual void Start()
         {
             if( _currentWeapon != null) _currentWeapon.gameObject.SetActive(true);
-        }
+        }      
     }
 }
