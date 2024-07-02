@@ -102,13 +102,13 @@ namespace ProjectTDS.Unit.Player
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""f66c2e0d-e255-486f-8ad2-5aa871c3b138"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""Delta"",
+                    ""type"": ""Value"",
+                    ""id"": ""f435b53f-87ab-42a9-86fb-71322f4489df"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -166,17 +166,6 @@ namespace ProjectTDS.Unit.Player
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4f4f3b09-7237-4ac1-8ba9-7f0291c87c37"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -254,32 +243,43 @@ namespace ProjectTDS.Unit.Player
                     ""action"": ""ReloadWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Camera"",
-            ""id"": ""28fa46da-a235-44f4-81ab-e37f854bee26"",
-            ""actions"": [
-                {
-                    ""name"": ""Delta"",
-                    ""type"": ""Value"",
-                    ""id"": ""1b7dafa3-e33a-4e9f-af77-0960da64ed3f"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
+                },
                 {
                     ""name"": """",
-                    ""id"": ""d2c9755f-2d4d-4e58-9156-a0d769e5bf84"",
+                    ""id"": ""b5f01da1-5acc-4f63-9737-d1292c3a691b"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Delta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""5416eab5-9171-477e-bc34-83773ae55b5a"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""59d548bb-5522-4a55-b24d-dbea199a7611"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""bc49ece7-c6fa-4ab6-b164-bf36ba9d3dee"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -298,10 +298,10 @@ namespace ProjectTDS.Unit.Player
             m_Player_SecondWeapon = m_Player.FindAction("SecondWeapon", throwIfNotFound: true);
             m_Player_ThirdWeapon = m_Player.FindAction("ThirdWeapon", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-            m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
-            // Camera
-            m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
-            m_Camera_Delta = m_Camera.FindAction("Delta", throwIfNotFound: true);
+            m_Player_Delta = m_Player.FindAction("Delta", throwIfNotFound: true);
+            // UI
+            m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+            m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -371,7 +371,7 @@ namespace ProjectTDS.Unit.Player
         private readonly InputAction m_Player_SecondWeapon;
         private readonly InputAction m_Player_ThirdWeapon;
         private readonly InputAction m_Player_Interact;
-        private readonly InputAction m_Player_Pause;
+        private readonly InputAction m_Player_Delta;
         public struct PlayerActions
         {
             private @PlayerInputs m_Wrapper;
@@ -384,7 +384,7 @@ namespace ProjectTDS.Unit.Player
             public InputAction @SecondWeapon => m_Wrapper.m_Player_SecondWeapon;
             public InputAction @ThirdWeapon => m_Wrapper.m_Player_ThirdWeapon;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
-            public InputAction @Pause => m_Wrapper.m_Player_Pause;
+            public InputAction @Delta => m_Wrapper.m_Player_Delta;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -418,9 +418,9 @@ namespace ProjectTDS.Unit.Player
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
-                @Pause.started += instance.OnPause;
-                @Pause.performed += instance.OnPause;
-                @Pause.canceled += instance.OnPause;
+                @Delta.started += instance.OnDelta;
+                @Delta.performed += instance.OnDelta;
+                @Delta.canceled += instance.OnDelta;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -449,9 +449,9 @@ namespace ProjectTDS.Unit.Player
                 @Interact.started -= instance.OnInteract;
                 @Interact.performed -= instance.OnInteract;
                 @Interact.canceled -= instance.OnInteract;
-                @Pause.started -= instance.OnPause;
-                @Pause.performed -= instance.OnPause;
-                @Pause.canceled -= instance.OnPause;
+                @Delta.started -= instance.OnDelta;
+                @Delta.performed -= instance.OnDelta;
+                @Delta.canceled -= instance.OnDelta;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -470,51 +470,51 @@ namespace ProjectTDS.Unit.Player
         }
         public PlayerActions @Player => new PlayerActions(this);
 
-        // Camera
-        private readonly InputActionMap m_Camera;
-        private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
-        private readonly InputAction m_Camera_Delta;
-        public struct CameraActions
+        // UI
+        private readonly InputActionMap m_UI;
+        private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+        private readonly InputAction m_UI_Pause;
+        public struct UIActions
         {
             private @PlayerInputs m_Wrapper;
-            public CameraActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Delta => m_Wrapper.m_Camera_Delta;
-            public InputActionMap Get() { return m_Wrapper.m_Camera; }
+            public UIActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Pause => m_Wrapper.m_UI_Pause;
+            public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
-            public void AddCallbacks(ICameraActions instance)
+            public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+            public void AddCallbacks(IUIActions instance)
             {
-                if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
-                @Delta.started += instance.OnDelta;
-                @Delta.performed += instance.OnDelta;
-                @Delta.canceled += instance.OnDelta;
+                if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
 
-            private void UnregisterCallbacks(ICameraActions instance)
+            private void UnregisterCallbacks(IUIActions instance)
             {
-                @Delta.started -= instance.OnDelta;
-                @Delta.performed -= instance.OnDelta;
-                @Delta.canceled -= instance.OnDelta;
+                @Pause.started -= instance.OnPause;
+                @Pause.performed -= instance.OnPause;
+                @Pause.canceled -= instance.OnPause;
             }
 
-            public void RemoveCallbacks(ICameraActions instance)
+            public void RemoveCallbacks(IUIActions instance)
             {
-                if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(ICameraActions instance)
+            public void SetCallbacks(IUIActions instance)
             {
-                foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public CameraActions @Camera => new CameraActions(this);
+        public UIActions @UI => new UIActions(this);
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
@@ -525,11 +525,11 @@ namespace ProjectTDS.Unit.Player
             void OnSecondWeapon(InputAction.CallbackContext context);
             void OnThirdWeapon(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
-            void OnPause(InputAction.CallbackContext context);
-        }
-        public interface ICameraActions
-        {
             void OnDelta(InputAction.CallbackContext context);
+        }
+        public interface IUIActions
+        {
+            void OnPause(InputAction.CallbackContext context);
         }
     }
 }

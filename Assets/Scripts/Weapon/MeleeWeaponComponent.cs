@@ -11,6 +11,8 @@ namespace ProjectTDS.Weapons
 
         public bool IsAttacking { get; private set; }
 
+        public float DelayBetweenAttack { get => _delayBetweenAttack; private set => _delayBetweenAttack = value; }
+
         public override void OnAction()
         {
             if (IsAttacking) return;
@@ -31,5 +33,10 @@ namespace ProjectTDS.Weapons
                 health.OnHealthGetDamage(Damage);
             }
         }       
+
+        public void Upgrade_DelayBetweenAttack()
+        {
+
+        }
     }
 }

@@ -1,6 +1,7 @@
 using ProjectTDS.Enums;
 using ProjectTDS.Unit;
 using ProjectTDS.Weapons;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,11 +22,13 @@ namespace ProjectTDS.Unit.Player
 
         public IWeapon _meleeWeapon => _currentMelee;
 
+        public event Action<FirearmWeaponComponent> OnChangeWeaponEventHandler;
+
         protected override void Start()
         {
-            InitWeaponDictionary();
-            OnSelectWeapon(0);
+            InitWeaponDictionary();         
             base.Start();
+            OnSelectWeapon(0);
         }
 
         private void InitWeaponDictionary()
@@ -52,8 +55,9 @@ namespace ProjectTDS.Unit.Player
             {
                 _currentWeapon.gameObject.SetActive(false);
                 _currentWeapon = _weapons[weaponIndex];
-                ChangeAnimationSet(_weaponKeyAnim[_currentWeapon]);
-                _currentWeapon.gameObject.SetActive(true);               
+                ChangeAnimationSet(_weaponKeyAnim[_currentWeapon]);              
+                _currentWeapon.gameObject.SetActive(true);
+                OnChangeWeaponEventHandler?.Invoke(_currentWeapon as FirearmWeaponComponent);
             }
             else return;
         }

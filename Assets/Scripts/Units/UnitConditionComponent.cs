@@ -6,14 +6,14 @@ namespace ProjectTDS.Unit
 {
     public class UnitConditionComponent : UnitComponent, ICanBeHit
     {
-        [Header("Характеристики:"), SerializeField, Range(0f, 100f)]
-        private float _maxHealthPoints = 100f;
+        [Header("Стандартные характеристики:"), SerializeField, Range(50f, 200f)]
+        protected float _maxHealthPoints = 100f;
         [SerializeField, Range(0f, 200f)]
-        private float _maxArmorPoints = 25f;
+        protected float _maxArmorPoints = 25f;
         [SerializeField, Range(0f, 5f)]
         private float _moveSpeed = 3f;
-
-        [Header("Debug:"), Space,SerializeField]
+      
+        [Space,Header("Проверка характеристик в реальном времени:"),SerializeField]
         protected float _currentHealthPoints;
         [SerializeField]
         protected float _currentArmorPoints;
@@ -22,7 +22,7 @@ namespace ProjectTDS.Unit
         public float ArmorPoints { get => _currentArmorPoints; }
         public float HealthPoints { get => _currentHealthPoints; }
 
-        private void Start()
+        protected virtual void Start()
         {
             _currentHealthPoints = _maxHealthPoints;
             _currentArmorPoints = _maxArmorPoints;         
@@ -49,7 +49,7 @@ namespace ProjectTDS.Unit
                 _currentHealthPoints -= damagePoints;
             }
 
-            if (_currentHealthPoints <= 0) OnDied();  //StartCoroutine(OnDied_Coroutine());
+            if (_currentHealthPoints <= 0) OnDied();
         }
 
         protected virtual void OnDied()

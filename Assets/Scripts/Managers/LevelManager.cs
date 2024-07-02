@@ -1,5 +1,6 @@
 using ProjectTDS.Unit.Enemy;
 using ProjectTDS.Unit.Player;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace ProjectTDS.Managers
 
         [SerializeField]
         private List<EnemyUnitComponent> _enemyCount;
+
+        public event Action<bool> MissonEndEventHandler;
 
         private void Awake()
         {
@@ -38,27 +41,28 @@ namespace ProjectTDS.Managers
             if(_enemyCount.Contains(enemy)) 
                 _enemyCount.Remove(enemy);
             
-            if (_enemyCount.Count <= 0) OnLevelOver();
+            if (_enemyCount.Count <= 0) OnLevelOver(true);
         }
 
         private void PlayerElimineted()
         {
-            if (_player == null) OnLevelOver();
+            if (_player == null) OnLevelOver(false);
         }
 
-        private void OnLevelOver()
+        private void OnLevelOver(bool playerWin)
         {
-            StartCoroutine(SlowingTime());
-            Debug.LogWarning("Игра окончена!");
+            StartCoroutine(StopTime());
+            MissonEndEventHandler?.Invoke(playerWin);
         }
 
-        private IEnumerator SlowingTime()
+        private IEnumerator StopTime()
         {
-            while(Time.timeScale > 0.1f)
-            {
-                yield return null;
-                Time.timeScale -= 0.1f;
-            }
+            var input = _player._controls as PlayerInputComponent;
+            input.enabled = false;
+
+            yield return new WaitForSeconds(5f);
+
+            Time.timeScale = 0f;
         }
 
         private void OnDestroy()

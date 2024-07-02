@@ -9924,6 +9924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 30
   _animKey: 2
+  _weaponName: AK-47
   _fireRange: 100
   _fireRate: 0.2
   _maxAmmo: 30

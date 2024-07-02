@@ -78,13 +78,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "f66c2e0d-e255-486f-8ad2-5aa871c3b138",
-                    "expectedControlType": "Button",
+                    "name": "Delta",
+                    "type": "Value",
+                    "id": "f435b53f-87ab-42a9-86fb-71322f4489df",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -142,17 +142,6 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "4f4f3b09-7237-4ac1-8ba9-7f0291c87c37",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -230,32 +219,43 @@
                     "action": "ReloadWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Camera",
-            "id": "28fa46da-a235-44f4-81ab-e37f854bee26",
-            "actions": [
-                {
-                    "name": "Delta",
-                    "type": "Value",
-                    "id": "1b7dafa3-e33a-4e9f-af77-0960da64ed3f",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "d2c9755f-2d4d-4e58-9156-a0d769e5bf84",
+                    "id": "b5f01da1-5acc-4f63-9737-d1292c3a691b",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Delta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "5416eab5-9171-477e-bc34-83773ae55b5a",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "59d548bb-5522-4a55-b24d-dbea199a7611",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bc49ece7-c6fa-4ab6-b164-bf36ba9d3dee",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

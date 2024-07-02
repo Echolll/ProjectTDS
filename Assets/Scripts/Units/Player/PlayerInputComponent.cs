@@ -1,3 +1,4 @@
+using ProjectTDS.Managers;
 using ProjectTDS.Unit.Player.Input;
 using UnityEngine;
 using Zenject;
@@ -6,6 +7,9 @@ namespace ProjectTDS.Unit.Player
 {
     public class PlayerInputComponent : BaseUnitInputComponent
     {
+        [Inject]
+        private UIManager _uiManager;
+
         [Inject]
         private PlayerInputHandler _inputHandler;
         [Inject]
@@ -31,15 +35,15 @@ namespace ProjectTDS.Unit.Player
             _inputHandler.Input.Player.FirstWeapon.performed += context => _actionHandler.ChangeWeaponInArms(Owner._weapon as PlayerSelectWeaponComponent, 0);
             _inputHandler.Input.Player.SecondWeapon.performed += context => _actionHandler.ChangeWeaponInArms(Owner._weapon as PlayerSelectWeaponComponent, 1);
             _inputHandler.Input.Player.ThirdWeapon.performed += context => _actionHandler.ChangeWeaponInArms(Owner._weapon as PlayerSelectWeaponComponent, 2);
+
+            _inputHandler.Input.UI.Pause.performed += context => _actionHandler.OpenPauseMenu(_uiManager);
         }
-
-
 
         private void OnDisable()
         {
             _inputHandler.DisableInput();
         }
-
+      
         private void Update()
         {                      
             _mousePosition = _inputHandler.GetMousePosition();
@@ -50,5 +54,13 @@ namespace ProjectTDS.Unit.Player
         }
        
         private void OnDestroy() => _inputHandler.DisableInput();
+
+        public void SwitchPlayerInput(bool switcher)
+        {
+            if (switcher)
+                _inputHandler.EnablePlayerInput();
+            else
+                _inputHandler.DisablePlayerInput();
+        }
     }
 }

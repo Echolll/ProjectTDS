@@ -9,7 +9,7 @@ namespace ProjectTDS.UI
     public class ConditionBlock : MonoBehaviour
     {
         [Inject]
-        private PlayerUnitComponent _player;
+        private PlayerConditionComponent _condition;
 
         [SerializeField]
         private FillWidjet _armor;
@@ -18,25 +18,23 @@ namespace ProjectTDS.UI
 
         private void OnEnable()
         {           
-            var player = _player._condition as PlayerConditionComponent;
-            player.UpdateConditionDataEventHandler += ConditionChangeData;
+            _condition.UpdateConditionDataEventHandler += ConditionChangeData;
         }
 
         private void OnDisable()
         {
-            var player = _player._condition as PlayerConditionComponent;
-            player.UpdateConditionDataEventHandler += ConditionChangeData;
+            _condition.UpdateConditionDataEventHandler -= ConditionChangeData;
         }
 
         private void Start() => ConditionChangeData();
 
         private void ConditionChangeData()
         {
-            _armor.Text.text = "Armor:" + Mathf.RoundToInt(_player._condition.ArmorPoints).ToString();
-            _armor.Fill.fillAmount = _player._condition.ArmorPoints / 100;
+            _armor.Text.text = "Armor:" + Mathf.RoundToInt(_condition.ArmorPoints).ToString();
+            _armor.Fill.fillAmount = _condition.ArmorPoints / _condition.GetMaxArmor;
 
-            _health.Text.text = "Health:" + Mathf.RoundToInt(_player._condition.HealthPoints).ToString();
-            _health.Fill.fillAmount = _player._condition.HealthPoints / 100;
+            _health.Text.text = "Health:" + Mathf.RoundToInt(_condition.HealthPoints).ToString();
+            _health.Fill.fillAmount = _condition.HealthPoints / _condition.GetMaxArmor;
         }
 
         [System.Serializable]

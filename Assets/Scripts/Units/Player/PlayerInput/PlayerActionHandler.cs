@@ -1,3 +1,4 @@
+using ProjectTDS.Managers;
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 
@@ -12,5 +13,7 @@ namespace ProjectTDS.Unit.Player.Input
         public void ChangeWeaponInArms(PlayerSelectWeaponComponent _weapon, int index) => _weapon.OnSelectWeapon(index);
 
         public void MeleeAction(PlayerSelectWeaponComponent _weapon) => _weapon.MeleeAction();
+
+        public void OpenPauseMenu(UIManager manager) => manager.SwitchPauseMenu();
     }
 }

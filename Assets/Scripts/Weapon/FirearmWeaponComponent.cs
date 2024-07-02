@@ -1,37 +1,48 @@
-using ProjectTDS.Unit.Player;
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
+using UnityEngine.SocialPlatforms;
 
 namespace ProjectTDS.Weapons
 {
     public class FirearmWeaponComponent : BaseWeaponComponent, IFirearm
     {
+        
         [SerializeField]
         private float _fireRange = 100f;
         [SerializeField]
-        private float _fireRate = 0.25f;
+        private float _fireRate = 0.25f;       
         [SerializeField]
-        private int _maxAmmo = 30;
-        [SerializeField]
-        private float reloadTime = 1.5f;
+        private float _reloadTime = 1.5f;
 
+        [Header("Настройки:")]
         [Space, SerializeField]
         private Transform _muzzlePosition;
         [SerializeField]
-        private ParticleSystem _muzzleFlash;
-        
-        [Space, SerializeField]
+        private ParticleSystem _muzzleFlash;        
+        [SerializeField]
         private BulletComponent _bulletPrefab;
 
-        [Space,SerializeField]
-        private int _currentAmmo;
+        [Header("Кол-во патрон в магазине:")]
+        [Space, SerializeField,Range(30,600)]
+        private int _ammoInStock;
+        [SerializeField]
+        private bool _infinityAmmo;
+        [SerializeField,Range(5,100)]
+        private int _maxAmmoInMag = 30;
+        [SerializeField]
+        private int _currentAmmoInMag;
 
         private bool _isRealoding = false;
         private float _nextTimeToFire = 0f;
 
-        private void Start() => _currentAmmo = _maxAmmo;
+        public float FireRate { get => _fireRate; private set => _fireRate = value; }
+        public float ReloadTime { get => _reloadTime; private set => _reloadTime = value; }
+       
+        public int CurrentAmmo { get => _currentAmmoInMag; }
+        public int AmmoInStock { get => _ammoInStock; }
+
+        private void Start() => _currentAmmoInMag = _maxAmmoInMag;
 
         private void OnEnable()
         {
@@ -41,13 +52,13 @@ namespace ProjectTDS.Weapons
         public override void OnAction()
         {         
             if (_isRealoding || Time.time < _nextTimeToFire || !gameObject.activeSelf) return;
-            if (_currentAmmo <= 0) Relaod();
+            if (_currentAmmoInMag <= 0) Relaod();
 
             _nextTimeToFire = Time.time + _fireRate;
 
             if (_muzzleFlash != null) _muzzleFlash.Play();
 
-            _currentAmmo--;
+            _currentAmmoInMag--;
 
             BulletComponent bullet = Instantiate(_bulletPrefab, _muzzlePosition.position, _muzzlePosition.rotation);
             bullet.Initialize(Damage);
@@ -56,7 +67,7 @@ namespace ProjectTDS.Weapons
 
         public void Relaod()
         {
-            if (_isRealoding) return;
+            if (_isRealoding || (_ammoInStock <= 0 && !_infinityAmmo)) return;
 
             StartCoroutine(ReloadCoroutine());
         }
@@ -65,10 +76,32 @@ namespace ProjectTDS.Weapons
         {
             _isRealoding = true;
 
-            yield return new WaitForSeconds(reloadTime);
+            yield return new WaitForSeconds(_reloadTime);
 
-            _currentAmmo = _maxAmmo;
+            if (_infinityAmmo)
+            {
+                _currentAmmoInMag = _maxAmmoInMag;             
+            }
+            else
+            {
+                int ammoNeeded = _maxAmmoInMag - _currentAmmoInMag;
+                int ammoToReaload = Mathf.Min(ammoNeeded, _ammoInStock);
+
+                _currentAmmoInMag += ammoToReaload;
+                _ammoInStock -= ammoToReaload;
+            }
+         
             _isRealoding = false;
         }        
+
+        public void Upgrade_FireRate()
+        {
+
+        }
+
+        public void Upgrade_ReloadTime()
+        {
+
+        }
     }
 }
