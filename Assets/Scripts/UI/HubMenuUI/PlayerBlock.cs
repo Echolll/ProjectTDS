@@ -27,7 +27,7 @@ namespace ProjectTDS.UI.HubMenu
             _secondaryWeapon.UpdatePlayerDataEventHandler += PlayerDataUpdating;
             _meleeWeapon.UpdatePlayerDataEventHandler += PlayerDataUpdating;
 
-            _playerMoneyText.text = _player.MoneyInBag.ToString();
+            _player.UpdateMoneyInfoEventHandler += UpdataMoneyInformation;           
         }
 
         private void OnDisable()
@@ -35,10 +35,20 @@ namespace ProjectTDS.UI.HubMenu
             _primaryWeapon.UpdatePlayerDataEventHandler -= PlayerDataUpdating;
             _secondaryWeapon.UpdatePlayerDataEventHandler -= PlayerDataUpdating;
             _meleeWeapon.UpdatePlayerDataEventHandler -= PlayerDataUpdating;
+
+            _player.UpdateMoneyInfoEventHandler -= UpdataMoneyInformation;
+        }
+
+        private void Start() => UpdataMoneyInformation();
+
+        private void UpdataMoneyInformation()
+        {
+            _playerMoneyText.text = $"${_player.MoneyInBag}";
         }
 
         private void PlayerDataUpdating(BaseWeaponComponent weapon)
         {
+            DontDestroyOnLoad(weapon.gameObject);
             _player.AddWeaponToList(weapon);
         }
     }   

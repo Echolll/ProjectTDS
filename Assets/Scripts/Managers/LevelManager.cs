@@ -14,10 +14,18 @@ namespace ProjectTDS.Managers
         [Inject]
         private PlayerUnitComponent _player;
 
+        [Inject]
+        private PlayerManager _playerManager;
+
         [SerializeField]
         private List<EnemyUnitComponent> _enemyCount;
 
-        public event Action<bool> MissonEndEventHandler;
+        [SerializeField]
+        private int _moneyFromKilledEnemy = 100;
+
+        private int _totalKilled;
+       
+        public event Action<bool, float, int, int> MissonEndEventHandler;
 
         private void Awake()
         {
@@ -38,9 +46,12 @@ namespace ProjectTDS.Managers
 
         private void EnemyElimineted(EnemyUnitComponent enemy)
         {
-            if(_enemyCount.Contains(enemy)) 
+            if (_enemyCount.Contains(enemy))
+            {
                 _enemyCount.Remove(enemy);
-            
+                _totalKilled++;
+            }
+
             if (_enemyCount.Count <= 0) OnLevelOver(true);
         }
 
@@ -52,7 +63,8 @@ namespace ProjectTDS.Managers
         private void OnLevelOver(bool playerWin)
         {
             StartCoroutine(StopTime());
-            MissonEndEventHandler?.Invoke(playerWin);
+            float multiply = playerWin ? 1 : 0.5f;
+            MissonEndEventHandler?.Invoke(playerWin, multiply, _totalKilled, _moneyFromKilledEnemy);
         }
 
         private IEnumerator StopTime()

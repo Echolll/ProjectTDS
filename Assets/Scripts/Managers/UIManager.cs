@@ -57,11 +57,11 @@ namespace ProjectTDS.Managers
             _weaponPanel.gameObject.SetActive(Activate);
         }
 
-        private void MissionEnd(bool status)
+        private void MissionEnd(bool status, float multiply, int killedEnemies, int money)
         {      
             OnSwitchBattleUI(false);
             _endMissionMenu.gameObject.SetActive(true);
-            _endMissionMenu.MissionEnd(status);
+            _endMissionMenu.MissionEnd(status, multiply, killedEnemies, money);
         }
 
         public void SwitchPauseMenu()

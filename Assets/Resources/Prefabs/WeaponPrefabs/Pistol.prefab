@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5638888702319354706}
   - component: {fileID: 7912797584203681664}
   - component: {fileID: 7375043296723221159}
+  - component: {fileID: 748349817226338852}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -121,17 +122,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe7b6cdd2a958c4781329f4683e6cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponName: Python
   _damage: 20
   _animKey: 1
-  _weaponName: Python
   _fireRange: 100
   _fireRate: 0.25
-  _maxAmmo: 6
-  reloadTime: 1.5
+  _reloadTime: 1.5
   _muzzlePosition: {fileID: 3189291491095830814}
   _muzzleFlash: {fileID: 2992557434169337911}
   _bulletPrefab: {fileID: 4518638021399300914, guid: 1ac59430c63851f45a3a21a4d29ec8fb, type: 3}
-  _currentAmmo: 0
+  _ammoInStock: 300
+  _infinityAmmo: 0
+  _maxAmmoInMag: 12
+  _currentAmmoInMag: 0
+--- !u!114 &748349817226338852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055942470313039803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca3a1c0f82b81448987444a5c4127b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstAttributeMaxLevel: 5
+  _secondAttributeMaxLevel: 5
+  _thirdAttributeMaxLevel: 5
+  _multiplierCost: 1.5
+  <CostFirstAttribute>k__BackingField: 1000
+  <CostSecondAttribute>k__BackingField: 500
+  <CostThirdAttribute>k__BackingField: 500
+  _addingNumberToFirstAttribute: 10
+  _addingNumberToSecondAttribute: 0.05
+  _addingNumberToThirdAttribute: 0.05
+  _UpgradeAddingNumberToFirstAttribute: 2
+  _UpgradeAddingNumberToSecondAttribute: 0.01
+  _UpgradeAddingNumberToThirdAttribute: 0.01
 --- !u!1 &2065955614501434269
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using ProjectTDS.Managers;
 using System;
 using TMPro;
 using UnityEngine;
@@ -16,12 +17,15 @@ namespace ProjectTDS.UI
 
         public event Action BackToMenuEventAction;
 
-        public void MissionEnd(bool playerWin)
+        public void MissionEnd(bool playerWin, float multiply, int killedEnemies, int money)
         {
-            _missionStatusText.text = playerWin ? "<color=green>mission complete</color>" : "<color=red>mission failed</color>";           
-            _rewardText.text = 
-                "Enemy with knife \nEnemy with knife \nEnemy with knife \nEnemy with knife"
-            ;
+            _missionStatusText.text = playerWin ? "<color=green>mission complete</color>" : "<color=red>mission failed</color>";
+
+            int totalMoney = (int)((killedEnemies * money) * multiply);
+
+            _rewardText.text = $"TOTAL KILLED:{killedEnemies}*{money} \nGet Money:{totalMoney}";
+
+            PlayerManager.Instance.AddMoneyToBug(totalMoney);
         }
 
         public void BackToMenu_UnityEvent()

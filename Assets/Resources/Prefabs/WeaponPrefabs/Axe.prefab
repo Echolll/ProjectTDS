@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3173872990112686975}
   - component: {fileID: 38573135394964988}
   - component: {fileID: 255423085247463076}
+  - component: {fileID: 1202304671072771092}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -122,3 +123,31 @@ MonoBehaviour:
   _damage: 100
   _animKey: 4
   _delayBetweenAttack: 2
+--- !u!114 &1202304671072771092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4846081464970082000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca3a1c0f82b81448987444a5c4127b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstAttributeMaxLevel: 5
+  _secondAttributeMaxLevel: 5
+  _thirdAttributeMaxLevel: 5
+  _multiplierCost: 2
+  <CostFirstAttribute>k__BackingField: 2000
+  <CostSecondAttribute>k__BackingField: 1500
+  <CostThirdAttribute>k__BackingField: 0
+  _addingNumberToFirstAttribute: 25
+  _addingNumberToSecondAttribute: 0.025
+  _addingNumberToThirdAttribute: 0
+  _UpgradeAddingNumberToFirstAttribute: 5
+  _UpgradeAddingNumberToSecondAttribute: 0.005
+  _UpgradeAddingNumberToThirdAttribute: 0
+  _firstAttributeLevel: 0
+  _secondAttributeLevel: 0
+  _thirdAttributeLevel: 0

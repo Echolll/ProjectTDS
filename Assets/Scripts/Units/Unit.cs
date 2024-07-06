@@ -16,7 +16,7 @@ namespace ProjectTDS.Unit
         protected internal UnitConditionComponent _condition;
         protected internal BaseSelectWeaponComponent _weapon;
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             _condition = GetComponent<UnitConditionComponent>();
             _rigibody = GetComponent<Rigidbody>();

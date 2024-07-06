@@ -1,20 +1,29 @@
 using ProjectTDS.Enums;
-using ProjectTDS.Unit;
+using ProjectTDS.Managers;
 using ProjectTDS.Weapons;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
+using static UnityEditor.PlayerSettings;
 
 namespace ProjectTDS.Unit.Player
 {
     public class PlayerSelectWeaponComponent : BaseSelectWeaponComponent
     {
+        [Inject]
+        private PlayerManager _playerManager;
+
         [SerializeField]
         private MeleeWeaponComponent _currentMelee;
-
+        
         [Space,SerializeField]
         private BaseWeaponComponent[] _weapons;
+
+        [Space, SerializeField]
+        private Transform _weaponPistol;
+        [SerializeField]
+        private Transform _weaponRifle;
 
         private Dictionary<BaseWeaponComponent, int> _weaponKeyAnim;
   
@@ -26,13 +35,38 @@ namespace ProjectTDS.Unit.Player
 
         protected override void Start()
         {
+            CreateWeaponGameobjects();
             InitWeaponDictionary();         
             base.Start();
             OnSelectWeapon(0);
         }
 
-        private void InitWeaponDictionary()
+        private void CreateWeaponGameobjects()
         {
+            var weaponList = _playerManager.GetGameobjects();
+            for(int i = 0; i < weaponList.Count; i++)
+            {
+                var baseWeapon = weaponList[i].GetComponent<BaseWeaponComponent>();
+                if (baseWeapon is MeleeWeaponComponent melee)
+                {
+                    _currentMelee = melee;
+                    baseWeapon.transform.SetParent(_weaponPistol);
+                }                   
+                else
+                {
+                    _weapons[i] = baseWeapon;
+                    Transform pos = baseWeapon.AnimKey == AnimateKey.Pistols ? _weaponPistol : _weaponRifle;
+                    baseWeapon.transform.SetParent(pos);
+                }
+               
+                baseWeapon.gameObject.transform.localPosition = Vector3.zero;
+                baseWeapon.gameObject.transform.localRotation = Quaternion.identity;
+                baseWeapon.gameObject.SetActive(false);
+            }
+        }
+
+        private void InitWeaponDictionary()
+        {           
             _weaponKeyAnim = new Dictionary<BaseWeaponComponent, int>();
 
             foreach (var weapon in _weapons) _weaponKeyAnim.Add(weapon, GetWeaponLayerIndex(weapon.AnimKey));

@@ -2,11 +2,12 @@ using ProjectTDS.Weapons;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ProjectTDS.UI.HubMenu
 {
-    public class SelectedWeaponBlock : MonoBehaviour
+    public class SelectedWeaponBlock : MonoBehaviour, IDropHandler
     {
         [SerializeField]
         private Image _weaponIcon;
@@ -46,5 +47,9 @@ namespace ProjectTDS.UI.HubMenu
             _weaponIcon.sprite = image;
         }
 
+        public void OnDrop(PointerEventData eventData)
+        {
+            
+        }
     }
 }

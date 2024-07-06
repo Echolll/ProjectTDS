@@ -15,5 +15,7 @@ namespace ProjectTDS.Unit.Player.Input
         public void MeleeAction(PlayerSelectWeaponComponent _weapon) => _weapon.MeleeAction();
 
         public void OpenPauseMenu(UIManager manager) => manager.SwitchPauseMenu();
+
+        public void InteractionAction(PlayerInteractionComponent _interaction) => _interaction.Interaction();
     }
 }

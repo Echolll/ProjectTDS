@@ -2,6 +2,7 @@ using ProjectTDS.Managers;
 using ProjectTDS.Unit.Player.Input;
 using UnityEngine;
 using Zenject;
+using static UnityEngine.UI.GridLayoutGroup;
 
 namespace ProjectTDS.Unit.Player
 {
@@ -35,6 +36,8 @@ namespace ProjectTDS.Unit.Player
             _inputHandler.Input.Player.FirstWeapon.performed += context => _actionHandler.ChangeWeaponInArms(Owner._weapon as PlayerSelectWeaponComponent, 0);
             _inputHandler.Input.Player.SecondWeapon.performed += context => _actionHandler.ChangeWeaponInArms(Owner._weapon as PlayerSelectWeaponComponent, 1);
             _inputHandler.Input.Player.ThirdWeapon.performed += context => _actionHandler.ChangeWeaponInArms(Owner._weapon as PlayerSelectWeaponComponent, 2);
+
+            if (Owner is PlayerUnitComponent unit) _inputHandler.Input.Player.Interact.performed += context => _actionHandler.InteractionAction(unit.Interaction);
 
             _inputHandler.Input.UI.Pause.performed += context => _actionHandler.OpenPauseMenu(_uiManager);
         }

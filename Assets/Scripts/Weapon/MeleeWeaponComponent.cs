@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ProjectTDS.Weapons
@@ -19,7 +20,7 @@ namespace ProjectTDS.Weapons
             IsAttacking = true;
             StartCoroutine(OnAttackEnd());
         }
-
+       
         private IEnumerator OnAttackEnd()
         {
             yield return new WaitForSeconds(_delayBetweenAttack);
@@ -32,11 +33,21 @@ namespace ProjectTDS.Weapons
             {
                 health.OnHealthGetDamage(Damage);
             }
-        }       
+        }
 
-        public void Upgrade_DelayBetweenAttack()
+        public override void FirstUpgradeAttribute(int number)
         {
+            Damage += number;
+        }
 
+        public override void SecondUpgradeAttribute(float number)
+        {
+            _delayBetweenAttack -= number;
+        }
+
+        public override void ThirdUpgradeAttribute(float number)
+        {
+            return;
         }
     }
 }

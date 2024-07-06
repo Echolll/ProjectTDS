@@ -94,14 +94,19 @@ namespace ProjectTDS.Weapons
             _isRealoding = false;
         }        
 
-        public void Upgrade_FireRate()
+        public override void FirstUpgradeAttribute(int number)
         {
-
+            Damage += number;
         }
 
-        public void Upgrade_ReloadTime()
+        public override void SecondUpgradeAttribute(float number)
         {
+            _fireRate -= number;
+        }
 
+        public override void ThirdUpgradeAttribute(float number)
+        {
+            ReloadTime -= number;
         }
     }
 }

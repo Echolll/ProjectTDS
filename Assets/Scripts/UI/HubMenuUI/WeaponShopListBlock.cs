@@ -1,3 +1,4 @@
+using ProjectTDS.Weapons;
 using UnityEngine;
 using Zenject;
 
@@ -18,7 +19,8 @@ namespace ProjectTDS.UI.HubMenu
             foreach(var config in _config._weaponContext)   
             {
                 WeaponBlock weapon = Instantiate(_weaponBlock);
-                weapon.Initialize(config._weaponIcon, config._weapon);
+                BaseWeaponComponent weaponComponent = Instantiate(config._weapon);                
+                weapon.Initialize(config._weaponIcon, weaponComponent);
                 weapon.gameObject.transform.SetParent(_content);
             }
         }
