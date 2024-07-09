@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using static UnityEditor.PlayerSettings;
 
 namespace ProjectTDS.Unit.Player
 {

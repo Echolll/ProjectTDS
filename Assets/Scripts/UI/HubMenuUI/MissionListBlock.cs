@@ -1,29 +1,31 @@
-using ProjectTDS.UI.HubMenu;
 using UnityEngine;
 using Zenject;
 
-public class MissionListBlock : MonoBehaviour
+namespace ProjectTDS.UI.HubMenu
 {
-    [Inject]
-    private MissionConfiguration _config;
-
-    [Header("Основные настройки:")]
-    [SerializeField]
-    private MissionBlock _missionBlock;
-    [SerializeField]
-    private RectTransform _content;
-
-    private void Awake()
+    public class MissionListBlock : MonoBehaviour
     {
-        foreach(var config in _config._missions)
+        [Inject]
+        private MissionConfiguration _config;
+
+        [Header("Основные настройки:")]
+        [SerializeField]
+        private MissionBlock _missionBlock;
+        [SerializeField]
+        private RectTransform _content;
+
+        private void Awake()
         {
-            MissionBlock block = Instantiate(_missionBlock);
-            block.Initialize(
-                config._missionImage,
-                config._missionType,
-                config._missionName,
-                config._sceneMissionName);
-            block.gameObject.transform.SetParent(_content);
+            foreach (var config in _config._missions)
+            {
+                MissionBlock block = Instantiate(_missionBlock);
+                block.Initialize(
+                    config._missionImage,
+                    config._missionType,
+                    config._missionName,
+                    config._sceneMissionName);
+                block.gameObject.transform.SetParent(_content);
+            }
         }
     }
 }

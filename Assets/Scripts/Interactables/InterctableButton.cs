@@ -1,27 +1,30 @@
 using System;
 using UnityEngine;
 
-public class InterctableButton : MonoBehaviour, IInteractable
+namespace ProjectTDS.Interactables
 {
-    [SerializeField]
-    private Material _activeMat;
-
-    private MeshRenderer _meshMaterial;
-
-    public bool Activate { get; private set; } = false;
-
-    public event Action ButtonIsActiveEventHandler;
-
-    private void Awake() => _meshMaterial = GetComponent<MeshRenderer>();
-
-    public void Interactable()
+    public class InterctableButton : MonoBehaviour, IInteractable
     {
-        if (!Activate)
+        [SerializeField]
+        private Material _activeMat;
+
+        private MeshRenderer _meshMaterial;
+
+        public bool Activate { get; private set; } = false;
+
+        public event Action ButtonIsActiveEventHandler;
+
+        private void Awake() => _meshMaterial = GetComponent<MeshRenderer>();
+
+        public void Interactable()
         {
-            Activate = true;
-            _meshMaterial.material = _activeMat;
-            ButtonIsActiveEventHandler?.Invoke();
+            if (!Activate)
+            {
+                Activate = true;
+                _meshMaterial.material = _activeMat;
+                ButtonIsActiveEventHandler?.Invoke();
+            }
+            else return;
         }
-        else return;
     }
 }

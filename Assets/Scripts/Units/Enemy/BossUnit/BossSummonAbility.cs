@@ -25,11 +25,9 @@ namespace ProjectTDS.Unit.Enemy.BossAbilities
         [Space,SerializeField]
         private List<GameObject> _summonsEnemies;
 
-        private Coroutine _coroutine;
-
         public override void UseAbility()
         {
-            _coroutine = StartCoroutine(SummonsEnemies());
+            StartCoroutine(SummonsEnemies());
         }    
 
         private IEnumerator SummonsEnemies()
@@ -45,8 +43,6 @@ namespace ProjectTDS.Unit.Enemy.BossAbilities
                 _summonsEnemies.Add(enemy);
                 yield return null;
             }
-
-            _coroutine = null;
         }
         
     }

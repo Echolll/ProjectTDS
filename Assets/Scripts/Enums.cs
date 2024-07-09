@@ -1,4 +1,3 @@
-
 namespace ProjectTDS.Enums
 {
     public enum AnimateKey : byte

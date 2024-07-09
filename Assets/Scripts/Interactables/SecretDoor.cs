@@ -2,45 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SecretDoor : MonoBehaviour
+namespace ProjectTDS.Interactables
 {
-    [SerializeField]
-    private List<InterctableButton> _buttons;
-
-    [Space,SerializeField]
-    private Transform _openPos;
-    [SerializeField]
-    private float _openSpeed = 2f;
-
-    private void OnEnable()
+    public class SecretDoor : MonoBehaviour
     {
-        foreach (var button in _buttons) button.ButtonIsActiveEventHandler += CheckAllButtonIsActive;
-    }
+        [SerializeField]
+        private List<InterctableButton> _buttons;
 
-    private void OnDisable()
-    {
-        foreach (var button in _buttons) button.ButtonIsActiveEventHandler -= CheckAllButtonIsActive;
-    }
+        [Space, SerializeField]
+        private Transform _openPos;
+        [SerializeField]
+        private float _openSpeed = 2f;
 
-    private void CheckAllButtonIsActive()
-    {
-        foreach(var button in _buttons)
+        private void OnEnable()
         {
-            if (button.Activate) continue;
-            else return;
+            foreach (var button in _buttons) button.ButtonIsActiveEventHandler += CheckAllButtonIsActive;
         }
 
-        StartCoroutine(OpenSecretDoor());
-    }
-
-    private IEnumerator OpenSecretDoor()
-    {
-        while (Vector3.Distance(transform.position, _openPos.position) >= 0.5f)
+        private void OnDisable()
         {
-            transform.position = Vector3.Lerp(transform.position, _openPos.position, Time.deltaTime * _openSpeed);
-            yield return null;
+            foreach (var button in _buttons) button.ButtonIsActiveEventHandler -= CheckAllButtonIsActive;
         }
 
-        transform.position = _openPos.position;
+        private void CheckAllButtonIsActive()
+        {
+            foreach (var button in _buttons)
+            {
+                if (button.Activate) continue;
+                else return;
+            }
+
+            StartCoroutine(OpenSecretDoor());
+        }
+
+        private IEnumerator OpenSecretDoor()
+        {
+            while (Vector3.Distance(transform.position, _openPos.position) >= 0.5f)
+            {
+                transform.position = Vector3.Lerp(transform.position, _openPos.position, Time.deltaTime * _openSpeed);
+                yield return null;
+            }
+
+            transform.position = _openPos.position;
+        }
     }
 }

@@ -1,7 +1,6 @@
 using ProjectTDS.Minigame;
 using ProjectTDS.Unit.Player;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 

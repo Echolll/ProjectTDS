@@ -6,8 +6,7 @@ using UnityEngine.SocialPlatforms;
 namespace ProjectTDS.Weapons
 {
     public class FirearmWeaponComponent : BaseWeaponComponent, IFirearm
-    {
-        
+    {       
         [SerializeField]
         private float _fireRange = 100f;
         [SerializeField]
