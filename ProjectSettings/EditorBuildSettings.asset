@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShootingRangeScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/KillKillaScene.unity
+    guid: 2cd9990471afe744abe6c9d62c0ad965
+  - enabled: 1
+    path: Assets/Scenes/EliminatedScene.unity
+    guid: 7ec0433d57778aa4c91c960965ee8c25
   m_configObjects: {}

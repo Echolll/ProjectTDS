@@ -43,8 +43,9 @@ namespace ProjectTDS.Weapons
 
         private void Start() => _currentAmmoInMag = _maxAmmoInMag;
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             _isRealoding = false;
         }
 
@@ -58,6 +59,7 @@ namespace ProjectTDS.Weapons
             if (_muzzleFlash != null) _muzzleFlash.Play();
 
             _currentAmmoInMag--;
+            _audioSource.Play();
 
             BulletComponent bullet = Instantiate(_bulletPrefab, _muzzlePosition.position, _muzzlePosition.rotation);
             bullet.Initialize(Damage);

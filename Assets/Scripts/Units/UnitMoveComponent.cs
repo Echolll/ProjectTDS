@@ -7,7 +7,7 @@ namespace ProjectTDS.Unit
         protected abstract void Update();
 
         public void UpdateAnimationStates(Vector3 currentVelocity)
-        {
+        {            
             var inverseVelocity = transform.InverseTransformDirection(currentVelocity / 2f);
 
             Owner._animator.SetBool("isMoving", currentVelocity.sqrMagnitude > 0.5f);

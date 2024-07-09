@@ -10,9 +10,7 @@ namespace ProjectTDS.Unit.Player
 
         public event Action <PlayerConditionComponent> PlayerDeathEventHandler;
         public event Action UpdateConditionDataEventHandler;
-
-        public bool _isDead { get; private set; } = false;
-
+       
         protected override void Start()
         {
             _currentArmorPoints = _maxArmorPoints / 2;
@@ -40,11 +38,9 @@ namespace ProjectTDS.Unit.Player
         }
 
         protected override void OnDied()
-        {
-            if(_isDead) return;
-            _isDead = true;
-            Owner._controls.enabled = false;
+        {                     
             base.OnDied();
+            if (Owner._controls is PlayerInputComponent input) input.SwitchPlayerInput(false);
             PlayerDeathEventHandler?.Invoke(this);
         }
     }

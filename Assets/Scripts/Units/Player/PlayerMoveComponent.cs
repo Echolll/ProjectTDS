@@ -36,6 +36,7 @@ namespace ProjectTDS.Unit.Player
             ref Vector3 movement = ref Owner._controls.MoveDirection;
             Owner._rigibody.AddForce(movement * Owner._condition.MoveSpeed / Time.deltaTime);
             UpdateAnimationStates(movement);
+            Owner._sound.PlayWalkSound(movement);
         }
     }
 }

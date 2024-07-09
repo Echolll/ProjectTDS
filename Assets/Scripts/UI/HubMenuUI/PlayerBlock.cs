@@ -23,11 +23,13 @@ namespace ProjectTDS.UI.HubMenu
 
         private void OnEnable()
         {
+            InitWeaponSlots();
+
             _primaryWeapon.UpdatePlayerDataEventHandler += PlayerDataUpdating;
             _secondaryWeapon.UpdatePlayerDataEventHandler += PlayerDataUpdating;
             _meleeWeapon.UpdatePlayerDataEventHandler += PlayerDataUpdating;
 
-            _player.UpdateMoneyInfoEventHandler += UpdataMoneyInformation;           
+            _player.UpdateMoneyInfoEventHandler += UpdataMoneyInformation;
         }
 
         private void OnDisable()
@@ -50,6 +52,13 @@ namespace ProjectTDS.UI.HubMenu
         {
             DontDestroyOnLoad(weapon.gameObject);
             _player.AddWeaponToList(weapon);
+        }
+
+        private void InitWeaponSlots()
+        {
+            _primaryWeapon.Init(_player);
+            _secondaryWeapon.Init(_player);
+            _meleeWeapon.Init(_player);
         }
     }   
 }

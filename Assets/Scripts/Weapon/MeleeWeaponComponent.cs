@@ -12,10 +12,16 @@ namespace ProjectTDS.Weapons
 
         public float DelayBetweenAttack { get => _delayBetweenAttack; private set => _delayBetweenAttack = value; }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+        }
+
         public override void OnAction()
         {
             if (IsAttacking) return;
             IsAttacking = true;
+            _audioSource.Play();
             StartCoroutine(OnAttackEnd());
         }
        

@@ -1,3 +1,4 @@
+using ProjectTDS.Managers;
 using ProjectTDS.Weapons;
 using System;
 using TMPro;
@@ -16,8 +17,15 @@ namespace ProjectTDS.UI.HubMenu
         [SerializeField]
         private bool _isMeleeWeapon;
 
+        private PlayerManager _playerManager;
+
         private BaseWeaponComponent _baseWeapon;
         private MeleeWeaponComponent _meleeWeapon;
+
+        public void Init(PlayerManager player)
+        {
+            _playerManager = player;           
+        }
 
         public event Action<BaseWeaponComponent> UpdatePlayerDataEventHandler;
 

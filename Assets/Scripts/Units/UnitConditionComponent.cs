@@ -20,6 +20,8 @@ namespace ProjectTDS.Unit
         public float ArmorPoints { get => _currentArmorPoints; }
         public float HealthPoints { get => _currentHealthPoints; }
 
+        public bool _isDead { get; private set; } = false;
+
         protected virtual void Start()
         {
             _currentHealthPoints = _maxHealthPoints;
@@ -52,10 +54,11 @@ namespace ProjectTDS.Unit
 
         protected virtual void OnDied()
         {
-            var animator = Owner._animator;
-            SetAllAnimatorLayersToZero(animator);
-            animator.SetTrigger("OnDeath");
-            Owner._rigibody.freezeRotation = false;            
+            if (_isDead) return;
+            _isDead = true;
+            SetAllAnimatorLayersToZero(Owner._animator);
+            Owner._animator.SetTrigger("OnDeath");
+            Owner._sound.UnitDeadSound();
         }
 
         private void SetAllAnimatorLayersToZero(Animator animator)

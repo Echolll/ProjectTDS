@@ -44,6 +44,7 @@ namespace ProjectTDS.Unit.Enemy.StateMachine
 
             if (!_unit.EnemyFOV.CanSeePlayer) OnLostPlayer();
 
+            if (_unit == null || _playerUnit == null) return;
             float distanceToPlayer = Vector3.Distance(_unit.transform.position, _playerUnit.transform.position);
 
             if (distanceToPlayer < _unit.FireDistance) 

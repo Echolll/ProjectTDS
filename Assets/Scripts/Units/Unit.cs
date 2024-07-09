@@ -3,7 +3,7 @@ using UnityEngine;
 using Zenject;
 
 namespace ProjectTDS.Unit
-{
+{ 
     public class Unit : MonoBehaviour
     {
         [Inject]
@@ -15,6 +15,7 @@ namespace ProjectTDS.Unit
         protected internal UnitMoveComponent _move;
         protected internal UnitConditionComponent _condition;
         protected internal BaseSelectWeaponComponent _weapon;
+        protected internal UnitSoundComponent _sound;
 
         protected virtual void Awake()
         {
@@ -24,6 +25,7 @@ namespace ProjectTDS.Unit
             _move = GetComponent<UnitMoveComponent>();    
             _weapon = GetComponent<BaseSelectWeaponComponent>();
             _animator = GetComponent<Animator>();
+            _sound = GetComponent<UnitSoundComponent>();
         }
     }
 }

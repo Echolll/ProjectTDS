@@ -2,6 +2,7 @@ using ProjectTDS.Unit.Enemy.StateMachine;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Windows;
 
 namespace ProjectTDS.Unit.Enemy
 {
@@ -50,9 +51,12 @@ namespace ProjectTDS.Unit.Enemy
 
         protected virtual void Update()
         {
-            StateMachine.CurrentState.Update();
+            if(StateMachine.CurrentState != null) StateMachine.CurrentState.Update();        
             Owner._move.UpdateAnimationStates(_agent.velocity);
+            Owner._sound.PlayWalkSound(_agent.velocity);
         }
+
+        private void OnDisable() => _agent.isStopped = true;
 
         #region EDITOR
 #if UNITY_EDITOR
