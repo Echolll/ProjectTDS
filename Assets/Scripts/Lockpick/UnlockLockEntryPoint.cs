@@ -1,33 +1,36 @@
 ﻿using UnityEngine;
 
-public class UnlockLockEntryPoint : MonoBehaviour
+namespace ProjectTDS.Minigame
 {
-    [SerializeField]
-    private Camera _camera;
-
-    [SerializeField]
-    private Lock _lock;
-
-    [SerializeField]
-    private Pick _pick;
-
-    private void OnEnable()
+    public class UnlockLockEntryPoint : MonoBehaviour
     {
-        SwitchLock(true);
+        [SerializeField]
+        private Camera _camera;
 
-        _pick.Init(_camera, _lock);
-        _lock.Init(_pick);
-    }
+        [SerializeField]
+        private Lock _lock;
 
-    private void OnDisable()
-    {
-        SwitchLock(false);
-    }
+        [SerializeField]
+        private Pick _pick;
 
-    private void SwitchLock(bool activate)
-    {
-        _camera.gameObject.SetActive(activate);
-        _lock.gameObject.SetActive(activate);
-        _pick.gameObject.SetActive(activate);
+        private void OnEnable()
+        {
+            SwitchLock(true);
+
+            _pick.Init(_camera, _lock);
+            _lock.Init(_pick);
+        }
+
+        private void OnDisable()
+        {
+            SwitchLock(false);
+        }
+
+        private void SwitchLock(bool activate)
+        {
+            _camera.gameObject.SetActive(activate);
+            _lock.gameObject.SetActive(activate);
+            _pick.gameObject.SetActive(activate);
+        }
     }
 }

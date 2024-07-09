@@ -12,6 +12,12 @@ namespace ProjectTDS.Unit.Enemy.StateMachine
 
         private PlayerUnitComponent _playerUnit;
 
+        public void InitPursuit(PlayerUnitComponent player)
+        {
+            _playerUnit = player;
+            _agent.SetDestination(player.transform.position);
+        }
+
         public PursuitState(EnemyInputComponent unit, NavMeshAgent agent)
         {
             _unit = unit;

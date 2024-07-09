@@ -1,11 +1,17 @@
+using ProjectTDS.Minigame;
+using ProjectTDS.Unit.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ProjectTDS.Interactables
 {
     public class InterctableDoor : MonoBehaviour, IInteractable, ILocked
     {
+        [Inject]
+        private PlayerInputComponent _playerInput;
+
         [field: SerializeField]
         public bool IsUnlocked { get; private set; } = false;
         
@@ -32,7 +38,11 @@ namespace ProjectTDS.Interactables
 
         public void Interactable()
         {
-            if(!IsUnlocked) LockPickComponent.Instance.OnPickTheLock(this);
+            if (!IsUnlocked)
+            {
+                LockPickComponent.Instance.OnPickTheLock(this);
+                _playerInput.SwitchPlayerInput(false);
+            }
             else SwitchDoor();
         }
 
@@ -40,6 +50,7 @@ namespace ProjectTDS.Interactables
         {
             IsUnlocked = true;
             LockPickComponent.Instance.SwitchPickTheLock(false);
+            _playerInput.SwitchPlayerInput(true);
             _panelMesh.material = _openPanel;
         }
          

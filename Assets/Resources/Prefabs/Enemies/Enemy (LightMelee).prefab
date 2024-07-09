@@ -988,7 +988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1471770127999637608
 Transform:
   m_ObjectHideFlags: 0
@@ -1153,11 +1153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 0}
-  _patrollingPoints:
-  - {x: -7.5, y: 0, z: 13.5}
-  - {x: 7.5, y: 0, z: 13.5}
-  - {x: 7.5, y: 0, z: 27}
-  - {x: -7.5, y: 0, z: 27}
+  _patrollingPoints: []
   <MinPauseDuration>k__BackingField: 0
   <MaxPauseDuration>k__BackingField: 0
   <LossPlayerDuration>k__BackingField: 0

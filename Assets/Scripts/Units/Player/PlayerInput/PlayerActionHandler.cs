@@ -1,6 +1,5 @@
 using ProjectTDS.Managers;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 namespace ProjectTDS.Unit.Player.Input
 {

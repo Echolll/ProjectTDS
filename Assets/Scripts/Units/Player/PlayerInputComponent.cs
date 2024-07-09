@@ -2,7 +2,6 @@ using ProjectTDS.Managers;
 using ProjectTDS.Unit.Player.Input;
 using UnityEngine;
 using Zenject;
-using static UnityEngine.UI.GridLayoutGroup;
 
 namespace ProjectTDS.Unit.Player
 {

@@ -55,15 +55,15 @@ namespace ProjectTDS.Managers
             if (_enemyCount.Count <= 0) OnLevelOver(true);
         }
 
-        private void PlayerElimineted()
+        private void PlayerElimineted(PlayerConditionComponent health)
         {
-            if (_player == null) OnLevelOver(false);
+            if(health._isDead) OnLevelOver(false);
         }
 
         private void OnLevelOver(bool playerWin)
         {
             StartCoroutine(StopTime());
-            float multiply = playerWin ? 1 : 0.5f;
+            float multiply = playerWin ? 1.5f : 0.75f;
             MissonEndEventHandler?.Invoke(playerWin, multiply, _totalKilled, _moneyFromKilledEnemy);
         }
 

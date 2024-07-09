@@ -10,10 +10,10 @@ namespace ProjectTDS.Unit.Player
         public float GetMaxHealth { get => _maxHealthPoints; }
         public float GetMaxArmor { get => _maxArmorPoints; }
 
-        public event Action PlayerDeathEventHandler;
+        public event Action <PlayerConditionComponent> PlayerDeathEventHandler;
         public event Action UpdateConditionDataEventHandler;
 
-        private bool _isDead = false;
+        public bool _isDead { get; private set; } = false;
 
         protected override void Start()
         {
@@ -47,7 +47,7 @@ namespace ProjectTDS.Unit.Player
             _isDead = true;
             Owner._controls.enabled = false;
             base.OnDied();
-            PlayerDeathEventHandler?.Invoke();
+            PlayerDeathEventHandler?.Invoke(this);
         }
     }
 }

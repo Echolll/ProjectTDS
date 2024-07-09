@@ -1,61 +1,63 @@
 ﻿using UnityEngine;
 
-public class Pick : MonoBehaviour
+namespace ProjectTDS.Minigame
 {
-    private Camera _camera;
-    private Lock _lock;
-    private float _eulerAngle;
-
-    private bool _isMoving = true;
-    public bool IsMoving => _isMoving;
-    public float Angle => _eulerAngle;
-
-    public void Init(Camera camera, Lock lockImpl)
+    public class Pick : MonoBehaviour
     {
-        _camera = camera;
-        _lock = lockImpl;
-        _lock.Unlocked += ResetMovement;
-    }
+        private Camera _camera;
+        private Lock _lock;
+        private float _eulerAngle;
 
-    public void OnDestroy()
-    {
-        if (_lock)
-            _lock.Unlocked -= ResetMovement;
-    }
+        private bool _isMoving = true;
+        public bool IsMoving => _isMoving;
+        public float Angle => _eulerAngle;
 
-    private void Update()
-    {
-        //transform.localPosition = _lock.PickAnchorPosition;
-
-        if (_isMoving)
+        public void Init(Camera camera, Lock lockImpl)
         {
-            var maxAngle = _lock.MaxRotationAngle;
-            var direction = Input.mousePosition - _camera.WorldToScreenPoint(transform.position);
-
-            _eulerAngle = Vector3.Angle(direction, Vector3.up);
-
-            var cross = Vector3.Cross(Vector3.up, direction);
-            if (cross.z < 0)
-                _eulerAngle = -_eulerAngle;
-
-            _eulerAngle = Mathf.Clamp(_eulerAngle, -maxAngle, maxAngle);
-
-            var targetRotation = Quaternion.AngleAxis(_eulerAngle, Vector3.forward);
-            transform.rotation = targetRotation;
+            _camera = camera;
+            _lock = lockImpl;
+            _lock.Unlocked += ResetMovement;
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        public void OnDestroy()
         {
-            _isMoving = false;
+            if (_lock)
+                _lock.Unlocked -= ResetMovement;
         }
-        if (Input.GetKeyUp(KeyCode.D))
+
+        private void Update()
+        {
+
+            if (_isMoving)
+            {
+                var maxAngle = _lock.MaxRotationAngle;
+                var direction = Input.mousePosition - _camera.WorldToScreenPoint(transform.position);
+
+                _eulerAngle = Vector3.Angle(direction, Vector3.up);
+
+                var cross = Vector3.Cross(Vector3.up, direction);
+                if (cross.z < 0)
+                    _eulerAngle = -_eulerAngle;
+
+                _eulerAngle = Mathf.Clamp(_eulerAngle, -maxAngle, maxAngle);
+
+                var targetRotation = Quaternion.AngleAxis(_eulerAngle, Vector3.forward);
+                transform.rotation = targetRotation;
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                _isMoving = false;
+            }
+            if (Input.GetKeyUp(KeyCode.D))
+            {
+                _isMoving = true;
+            }
+        }
+
+        private void ResetMovement()
         {
             _isMoving = true;
         }
-    }
-
-    private void ResetMovement()
-    {
-        _isMoving = true;
     }
 }

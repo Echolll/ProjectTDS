@@ -1,33 +1,14 @@
 using ProjectTDS.Unit.Enemy.StateMachine;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace ProjectTDS.Unit.Enemy
 {
     public class EnemyInputComponent : BaseUnitInputComponent
-    {
-        private EnemyFOVComponent _enemyFOV;
-
-        private StateMachine.StateMachine _stateMachine;
-
-        public EnemyFOVComponent EnemyFOV { get => _enemyFOV; private set => _enemyFOV = value; }
-
-        public StateMachine.StateMachine StateMachine { get => _stateMachine; private set => _stateMachine = value; }
-
-        public NavMeshAgent _agent;
-
-        public IdleState IdleState;
-        public PursuitState PursuitState;
-        public ShootState ShootState;
-
-        //todo ^
-
-        [SerializeField]
-        private Vector3[] _patrollingPoints;
-
-        public Vector3[] PatrollingPoints { get => _patrollingPoints; }
+    {       
+        [field : SerializeField]
+        public Vector3[] PatrollingPoints { get; private set; }
        
         [field : SerializeField, Range(1,5), Space]
         public float MinPauseDuration { get; private set; }
@@ -40,26 +21,36 @@ namespace ProjectTDS.Unit.Enemy
         [field: SerializeField, Range(3, 10), Space]
         public float FireDistance { get; private set; }
 
+        public EnemyFOVComponent EnemyFOV { get; private set; }
+
+        public NavMeshAgent _agent { get; private set; }
+
+        public StateMachine.StateMachine StateMachine { get; protected set; }
+        public IdleState IdleState { get; protected set; }
+        public PursuitState PursuitState { get; protected set; }
+        public ShootState ShootState { get; protected set; }
+
         protected override void Awake()
         {
             base.Awake();
-            _enemyFOV = GetComponent<EnemyFOVComponent>();
+            EnemyFOV = GetComponent<EnemyFOVComponent>();
             _agent = GetComponent<NavMeshAgent>();
         }
 
         private void Start()
         {
-            _stateMachine = new StateMachine.StateMachine();
+            StateMachine = new StateMachine.StateMachine();
             IdleState = new IdleState(this, _agent);
             PursuitState = new PursuitState(this, _agent);
             ShootState = new ShootState(this, _agent, Owner as EnemyUnitComponent);
 
-            _stateMachine.Initialize(IdleState);
+            StateMachine.Initialize(IdleState);
+            _agent.speed = Owner._condition.MoveSpeed;
         }
 
-        private void Update()
+        protected virtual void Update()
         {
-            _stateMachine.CurrentState.Update();
+            StateMachine.CurrentState.Update();
             Owner._move.UpdateAnimationStates(_agent.velocity);
         }
 
@@ -67,8 +58,8 @@ namespace ProjectTDS.Unit.Enemy
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            if (_patrollingPoints.Length == 0) return;
-            foreach (var point in _patrollingPoints)
+            if (PatrollingPoints.Length == 0) return;
+            foreach (var point in PatrollingPoints)
             {
                 Vector3 size = new Vector3(0.25f, 5, 0.25f);
                 Gizmos.color = Color.green;

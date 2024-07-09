@@ -1534,11 +1534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 0}
-  _patrollingPoints:
-  - {x: -7.5, y: 0, z: 13.5}
-  - {x: 7.5, y: 0, z: 13.5}
-  - {x: 7.5, y: 0, z: 27}
-  - {x: -7.5, y: 0, z: 27}
+  _patrollingPoints: []
   <MinPauseDuration>k__BackingField: 0
   <MaxPauseDuration>k__BackingField: 0
   <LossPlayerDuration>k__BackingField: 0
