@@ -25,6 +25,8 @@ namespace ProjectTDS.Minigame
 
         public event Action Unlocked;
 
+        private LockPickComponent _lockPick;
+
         private void OnEnable()
         {
             Unlocked += GenerateUnlockAngle;
@@ -35,8 +37,9 @@ namespace ProjectTDS.Minigame
             Unlocked -= GenerateUnlockAngle;
         }
 
-        public void Init(Pick pick)
+        public void Init(Pick pick, LockPickComponent lockpick)
         {
+            _lockPick = lockpick;
             _pick = pick;
             GenerateUnlockAngle();
         }
@@ -66,7 +69,7 @@ namespace ProjectTDS.Minigame
                 if (_pick.Angle < _unlockRange.y && _pick.Angle > _unlockRange.x)
                 {
                     Debug.Log("Unlocked!");
-                    LockPickComponent.Instance._locked.OpenLock();
+                    _lockPick._locked.OpenLock();
                     Unlocked?.Invoke();
                 }
             }

@@ -7,15 +7,7 @@ namespace ProjectTDS.Minigame
         [SerializeField]
         private UnlockLockEntryPoint _unlockLock;
 
-        public static LockPickComponent Instance { get; private set; }
-
         public ILocked _locked;
-
-        private void Awake()
-        {
-            if (Instance == null) Instance = this;
-            else Destroy(gameObject);
-        }
 
         public void OnPickTheLock(ILocked locked)
         {

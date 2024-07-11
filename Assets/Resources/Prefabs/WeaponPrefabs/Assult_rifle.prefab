@@ -9934,7 +9934,7 @@ MonoBehaviour:
   _muzzlePosition: {fileID: 7275071206627197379}
   _muzzleFlash: {fileID: 4042982195036775025}
   _bulletPrefab: {fileID: 4518638021399300914, guid: 1ac59430c63851f45a3a21a4d29ec8fb, type: 3}
-  _ammoInStock: 0
+  _ammoInStock: 400
   _infinityAmmo: 0
   _maxAmmoInMag: 30
   _currentAmmoInMag: 0
@@ -9950,22 +9950,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca3a1c0f82b81448987444a5c4127b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstAttributeMaxLevel: 5
-  _secondAttributeMaxLevel: 5
-  _thirdAttributeMaxLevel: 5
+  _firstAttributeLevel: {x: 0, y: 5}
+  _secondAttributeLevel: {x: 0, y: 5}
+  _thirdAttributeLevel: {x: 0, y: 5}
+  _addingNumberToFirstAttribute: {x: 10, y: 2}
+  _addingNumberToSecondAttribute: {x: 0.02, y: 0.002}
+  _addingNumberToThirdAttribute: {x: 0.025, y: 0.005}
   _multiplierCost: 1.125
   <CostFirstAttribute>k__BackingField: 1000
   <CostSecondAttribute>k__BackingField: 500
   <CostThirdAttribute>k__BackingField: 500
-  _addingNumberToFirstAttribute: 10
-  _addingNumberToSecondAttribute: 0.05
-  _addingNumberToThirdAttribute: 0.05
-  _UpgradeAddingNumberToFirstAttribute: 2
-  _UpgradeAddingNumberToSecondAttribute: 0.01
-  _UpgradeAddingNumberToThirdAttribute: 0.01
-  _firstAttributeLevel: 0
-  _secondAttributeLevel: 0
-  _thirdAttributeLevel: 0
 --- !u!82 &810381166050900853
 AudioSource:
   m_ObjectHideFlags: 0

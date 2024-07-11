@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace ProjectTDS.Minigame
 {
     public class UnlockLockEntryPoint : MonoBehaviour
     {
+        [Inject]
+        private LockPickComponent _lockpick;
+
         [SerializeField]
         private Camera _camera;
 
@@ -18,7 +22,7 @@ namespace ProjectTDS.Minigame
             SwitchLock(true);
 
             _pick.Init(_camera, _lock);
-            _lock.Init(_pick);
+            _lock.Init(_pick, _lockpick);
         }
 
         private void OnDisable()

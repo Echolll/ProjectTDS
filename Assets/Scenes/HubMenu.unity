@@ -215,9 +215,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed5f047676dd2646abe82779b6f6807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _primaryWeapon: {fileID: 1294782767}
-  _secondaryWeapon: {fileID: 1222777525}
-  _meleeWeapon: {fileID: 1142448208}
+  _weapons:
+  - {fileID: 1294782767}
+  - {fileID: 1222777525}
+  - {fileID: 1142448208}
   _playerMoneyText: {fileID: 1397217546}
 --- !u!1 &66790744
 GameObject:

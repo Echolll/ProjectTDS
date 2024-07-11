@@ -17,17 +17,12 @@ namespace ProjectTDS.UI.HubMenu
         [SerializeField]
         private bool _isMeleeWeapon;
 
-        private PlayerManager _playerManager;
-
         private BaseWeaponComponent _baseWeapon;
         private MeleeWeaponComponent _meleeWeapon;
 
-        public void Init(PlayerManager player)
-        {
-            _playerManager = player;           
-        }
-
         public event Action<BaseWeaponComponent> UpdatePlayerDataEventHandler;
+
+        private void OnEnable() => LoadSelectedWeapon();
 
         public void SetWeapon(BaseWeaponComponent weapon, Sprite image)
         {
@@ -36,7 +31,7 @@ namespace ProjectTDS.UI.HubMenu
                 _baseWeapon = melee;
                 _meleeWeapon = melee;
             }
-            else if(!_isMeleeWeapon)
+            else if (!_isMeleeWeapon)
             {
                 _baseWeapon = weapon;
             }
@@ -52,6 +47,30 @@ namespace ProjectTDS.UI.HubMenu
         {
             _weaponName.text = _baseWeapon.WeaponName;
             _weaponIcon.sprite = image;
+            SaveSelectedWeapon();
+        }
+
+        public void LoadSelectedWeapon()
+        {
+            if (GameDataManager.Instance.selectedWeapon.TryGetValue(gameObject.name, out SelectedWeapon savedData))
+            {
+                SetWeapon(savedData.Weapon, savedData.Icon);
+            }
+        }
+
+        private void SaveSelectedWeapon()
+        {
+            SelectedWeapon selectedWeapon = new SelectedWeapon()
+            {
+                Icon = _weaponIcon.sprite,
+                Weapon = _baseWeapon,
+                BlockName = gameObject.name
+            };
+
+            if (GameDataManager.Instance.selectedWeapon.ContainsKey(gameObject.name))           
+                GameDataManager.Instance.selectedWeapon[gameObject.name] = selectedWeapon;           
+            else
+                GameDataManager.Instance.selectedWeapon.Add(gameObject.name, selectedWeapon);
         }
     }
 }

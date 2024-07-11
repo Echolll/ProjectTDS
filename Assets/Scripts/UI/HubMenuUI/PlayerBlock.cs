@@ -1,5 +1,6 @@
 using ProjectTDS.Managers;
 using ProjectTDS.Weapons;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -12,31 +13,27 @@ namespace ProjectTDS.UI.HubMenu
         private PlayerManager _player;
 
         [SerializeField]
-        private SelectedWeaponBlock _primaryWeapon;
-        [SerializeField]
-        private SelectedWeaponBlock _secondaryWeapon;
-        [SerializeField]
-        private SelectedWeaponBlock _meleeWeapon;
+        private List<SelectedWeaponBlock> _weapons;
 
         [SerializeField]
         private TextMeshProUGUI _playerMoneyText;
 
         private void OnEnable()
         {
-            InitWeaponSlots();
-
-            _primaryWeapon.UpdatePlayerDataEventHandler += PlayerDataUpdating;
-            _secondaryWeapon.UpdatePlayerDataEventHandler += PlayerDataUpdating;
-            _meleeWeapon.UpdatePlayerDataEventHandler += PlayerDataUpdating;
+            foreach (var weapon in _weapons)
+            {
+                weapon.UpdatePlayerDataEventHandler += PlayerDataUpdating;
+            }
 
             _player.UpdateMoneyInfoEventHandler += UpdataMoneyInformation;
         }
 
         private void OnDisable()
         {
-            _primaryWeapon.UpdatePlayerDataEventHandler -= PlayerDataUpdating;
-            _secondaryWeapon.UpdatePlayerDataEventHandler -= PlayerDataUpdating;
-            _meleeWeapon.UpdatePlayerDataEventHandler -= PlayerDataUpdating;
+            foreach (var weapon in _weapons)
+            {
+                weapon.UpdatePlayerDataEventHandler -= PlayerDataUpdating;
+            }
 
             _player.UpdateMoneyInfoEventHandler -= UpdataMoneyInformation;
         }
@@ -50,15 +47,7 @@ namespace ProjectTDS.UI.HubMenu
 
         private void PlayerDataUpdating(BaseWeaponComponent weapon)
         {
-            DontDestroyOnLoad(weapon.gameObject);
             _player.AddWeaponToList(weapon);
-        }
-
-        private void InitWeaponSlots()
-        {
-            _primaryWeapon.Init(_player);
-            _secondaryWeapon.Init(_player);
-            _meleeWeapon.Init(_player);
         }
     }   
 }

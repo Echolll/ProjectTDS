@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3150218924823706352}
   - component: {fileID: 6881213401791900958}
   - component: {fileID: -2142853574109989386}
+  - component: {fileID: 4663484734242719065}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -88,3 +89,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MoneyInBag>k__BackingField: 5000
+--- !u!114 &4663484734242719065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362898467570386547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ff3afb55bab904ba4fdf459eda8068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

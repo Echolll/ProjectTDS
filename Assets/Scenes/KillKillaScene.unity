@@ -10145,6 +10145,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4619902298182921277, guid: 03b78eb9ec8d16a4bbae88f56cbad00d, type: 3}
+      propertyPath: <IsUnlocked>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6071123939987091246, guid: 03b78eb9ec8d16a4bbae88f56cbad00d, type: 3}
       propertyPath: m_Layer
       value: 6

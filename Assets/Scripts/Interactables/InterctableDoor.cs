@@ -10,6 +10,8 @@ namespace ProjectTDS.Interactables
     {
         [Inject]
         private PlayerInputComponent _playerInput;
+        [Inject]
+        private LockPickComponent _lockPick;
 
         [field: SerializeField]
         public bool IsUnlocked { get; private set; } = false;
@@ -39,7 +41,7 @@ namespace ProjectTDS.Interactables
         {
             if (!IsUnlocked)
             {
-                LockPickComponent.Instance.OnPickTheLock(this);
+                _lockPick.OnPickTheLock(this);
                 _playerInput.SwitchPlayerInput(false);
             }
             else SwitchDoor();
@@ -48,7 +50,7 @@ namespace ProjectTDS.Interactables
         public void OpenLock()
         {
             IsUnlocked = true;
-            LockPickComponent.Instance.SwitchPickTheLock(false);
+            _lockPick.SwitchPickTheLock(false);
             _playerInput.SwitchPlayerInput(true);
             _panelMesh.material = _openPanel;
         }

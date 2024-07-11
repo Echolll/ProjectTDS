@@ -7,13 +7,21 @@ namespace ProjectTDS.Weapons
     {
         private PlayerManager _player;
 
-        [Header("Максимальный уровень улучшения:")]
-        [SerializeField, Range(5, 10)]
-        private int _firstAttributeMaxLevel = 5;
-        [SerializeField, Range(5, 10)]
-        private int _secondAttributeMaxLevel = 5;
-        [SerializeField, Range(5, 10)]
-        private int _thirdAttributeMaxLevel = 5;
+        [Header("Корректный/Максимальный уровень улучшения:")]
+        [SerializeField]
+        private Vector2Int _firstAttributeLevel;
+        [SerializeField]
+        private Vector2Int _secondAttributeLevel;
+        [SerializeField]
+        private Vector2Int _thirdAttributeLevel;
+
+        [Header("На какое число улучшиться:")]
+        [Space, SerializeField]
+        private Vector2 _addingNumberToFirstAttribute;
+        [SerializeField]
+        private Vector2 _addingNumberToSecondAttribute;
+        [SerializeField]
+        private Vector2 _addingNumberToThirdAttribute;
 
         [Header("Цена улучшения:")]
         [Space, SerializeField, Range(1, 3)]
@@ -25,29 +33,7 @@ namespace ProjectTDS.Weapons
         public int CostSecondAttribute { get; private set; }
         [field: SerializeField]
         public int CostThirdAttribute { get; private set; }
-
-        [Header("На какое число улучшиться:")]
-        [Space, SerializeField]
-        private float _addingNumberToFirstAttribute;
-        [SerializeField]
-        private float _addingNumberToSecondAttribute;
-        [SerializeField]
-        private float _addingNumberToThirdAttribute;
-
-        [Space, SerializeField]
-        private float _UpgradeAddingNumberToFirstAttribute;
-        [SerializeField]
-        private float _UpgradeAddingNumberToSecondAttribute;
-        [SerializeField]
-        private float _UpgradeAddingNumberToThirdAttribute;
-
-        [Space, SerializeField]
-        private int _firstAttributeLevel;
-        [SerializeField]
-        private int _secondAttributeLevel;
-        [SerializeField]
-        private int _thirdAttributeLevel;
-
+      
         private IUpgradable _upgrade;
 
         public void Init(IUpgradable upgradable)
@@ -58,37 +44,37 @@ namespace ProjectTDS.Weapons
 
         public void UpgradeFistAttribute()
         {
-            if (_firstAttributeLevel >= _firstAttributeMaxLevel) return;
+            if (_firstAttributeLevel.x >= _firstAttributeLevel.y) return;
             if (!HavePlayerMoney(CostFirstAttribute)) return;
-            _firstAttributeLevel++;
+            _firstAttributeLevel.x++;
 
-            _upgrade.FirstUpgradeAttribute((int)_addingNumberToFirstAttribute);
-
-            _addingNumberToFirstAttribute -= _UpgradeAddingNumberToFirstAttribute;
+            _upgrade.FirstUpgradeAttribute((int)_addingNumberToFirstAttribute.x);
+            
+            _addingNumberToFirstAttribute.x -= _addingNumberToFirstAttribute.y;
             CostFirstAttribute = OnUpCostAfterUpgrade(CostFirstAttribute);
         }
 
         public void UpgradeSecondAttribute()
         {
-            if (_secondAttributeLevel >= _secondAttributeMaxLevel) return;
+            if (_secondAttributeLevel.x >= _secondAttributeLevel.y) return;
             if (!HavePlayerMoney(CostSecondAttribute)) return;
-            _secondAttributeLevel++;
+            _secondAttributeLevel.x++;
 
-            _upgrade.SecondUpgradeAttribute(_addingNumberToSecondAttribute);
+            _upgrade.SecondUpgradeAttribute(_addingNumberToSecondAttribute.x);
 
-            _addingNumberToSecondAttribute -= _UpgradeAddingNumberToSecondAttribute;
+            _addingNumberToSecondAttribute.x -= _addingNumberToSecondAttribute.y;
             CostSecondAttribute = OnUpCostAfterUpgrade(CostSecondAttribute);
         }
 
         public void UpgradeThirdAttribute()
         {
-            if (_thirdAttributeLevel >= _thirdAttributeMaxLevel) return;
+            if (_thirdAttributeLevel.x >= _thirdAttributeLevel.y) return;
             if (!HavePlayerMoney(CostThirdAttribute)) return;
-            _thirdAttributeLevel++;
+            _thirdAttributeLevel.x++;
 
-            _upgrade.ThirdUpgradeAttribute(_addingNumberToThirdAttribute);
+            _upgrade.ThirdUpgradeAttribute(_addingNumberToThirdAttribute.x);
 
-            _addingNumberToThirdAttribute -= _UpgradeAddingNumberToThirdAttribute;
+            _addingNumberToThirdAttribute.x -= _addingNumberToThirdAttribute.y;
             CostThirdAttribute = OnUpCostAfterUpgrade(CostThirdAttribute);
         }
 

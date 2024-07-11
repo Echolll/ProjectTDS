@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponName: Knife
   _weaponSound: {fileID: 8300000, guid: b95566f6c5a28fa4d9d7efa419b81473, type: 3}
-  _damage: 50
+  _damage: 35
   _animKey: 3
   _delayBetweenAttack: 2
 --- !u!114 &-2385693304227367218
@@ -137,22 +137,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca3a1c0f82b81448987444a5c4127b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstAttributeMaxLevel: 5
-  _secondAttributeMaxLevel: 5
-  _thirdAttributeMaxLevel: 5
-  _multiplierCost: 1.5
-  <CostFirstAttribute>k__BackingField: 2500
-  <CostSecondAttribute>k__BackingField: 1000
+  _firstAttributeLevel: {x: 0, y: 3}
+  _secondAttributeLevel: {x: 0, y: 5}
+  _thirdAttributeLevel: {x: 0, y: 0}
+  _addingNumberToFirstAttribute: {x: 15, y: 5}
+  _addingNumberToSecondAttribute: {x: 0.02, y: 0.002}
+  _addingNumberToThirdAttribute: {x: 0, y: 0}
+  _multiplierCost: 1.25
+  <CostFirstAttribute>k__BackingField: 1500
+  <CostSecondAttribute>k__BackingField: 500
   <CostThirdAttribute>k__BackingField: 0
-  _addingNumberToFirstAttribute: 25
-  _addingNumberToSecondAttribute: 0.025
-  _addingNumberToThirdAttribute: 0
-  _UpgradeAddingNumberToFirstAttribute: 5
-  _UpgradeAddingNumberToSecondAttribute: 0.005
-  _UpgradeAddingNumberToThirdAttribute: 0
-  _firstAttributeLevel: 0
-  _secondAttributeLevel: 0
-  _thirdAttributeLevel: 0
 --- !u!82 &6536105674594710740
 AudioSource:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6510946856800771070
 Transform:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponName: Axe
   _weaponSound: {fileID: 8300000, guid: fe1e5ba6b4c39ae4ab312f475bf1d992, type: 3}
-  _damage: 100
+  _damage: 65
   _animKey: 4
   _delayBetweenAttack: 2
 --- !u!114 &1202304671072771092
@@ -137,22 +137,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca3a1c0f82b81448987444a5c4127b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstAttributeMaxLevel: 5
-  _secondAttributeMaxLevel: 5
-  _thirdAttributeMaxLevel: 5
-  _multiplierCost: 2
-  <CostFirstAttribute>k__BackingField: 2000
-  <CostSecondAttribute>k__BackingField: 1500
+  _firstAttributeLevel: {x: 0, y: 3}
+  _secondAttributeLevel: {x: 0, y: 5}
+  _thirdAttributeLevel: {x: 0, y: 0}
+  _addingNumberToFirstAttribute: {x: 30, y: 10}
+  _addingNumberToSecondAttribute: {x: 0.02, y: 0.002}
+  _addingNumberToThirdAttribute: {x: 0, y: 0}
+  _multiplierCost: 1.25
+  <CostFirstAttribute>k__BackingField: 1500
+  <CostSecondAttribute>k__BackingField: 500
   <CostThirdAttribute>k__BackingField: 0
-  _addingNumberToFirstAttribute: 25
-  _addingNumberToSecondAttribute: 0.025
-  _addingNumberToThirdAttribute: 0
-  _UpgradeAddingNumberToFirstAttribute: 5
-  _UpgradeAddingNumberToSecondAttribute: 0.005
-  _UpgradeAddingNumberToThirdAttribute: 0
-  _firstAttributeLevel: 0
-  _secondAttributeLevel: 0
-  _thirdAttributeLevel: 0
 --- !u!82 &8963195451509641305
 AudioSource:
   m_ObjectHideFlags: 0

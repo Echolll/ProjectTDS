@@ -1,3 +1,4 @@
+using ProjectTDS.Minigame;
 using ProjectTDS.Unit.Player;
 using ProjectTDS.Unit.Player.Input;
 using Zenject;
@@ -20,6 +21,9 @@ namespace ProjectTDS.Managers
             
             Container.BindInstance(GetComponent<UIManager>()).AsSingle();
             Container.BindInstance(GetComponent<LevelManager>()).AsSingle();
+
+            var lockpick = FindObjectOfType<LockPickComponent>();
+            Container.BindInstance(lockpick).AsSingle();
         }
     }
 }

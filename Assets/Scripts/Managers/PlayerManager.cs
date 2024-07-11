@@ -26,13 +26,14 @@ namespace ProjectTDS.Managers
             else
             {
                 Destroy(gameObject);
-            }
+            }        
         }
 
         public event Action UpdateMoneyInfoEventHandler;
 
         public void AddWeaponToList(BaseWeaponComponent weapon)
         {
+            if(FirstWeaponInListNull()) FirearmList.Clear();
             if (weapon is MeleeWeaponComponent meleeWeapon) MeleeWeapon = meleeWeapon;
             else
             {
@@ -48,11 +49,11 @@ namespace ProjectTDS.Managers
 
             foreach (var weapon in FirearmList)
             {
-                obj = weapon.gameObject;
+                obj = Instantiate(weapon.gameObject);
                 if(obj is GameObject) list.Add(obj);
             }
 
-            obj = MeleeWeapon.gameObject;
+            obj = Instantiate(MeleeWeapon.gameObject);
             if (obj is GameObject) list.Add(obj);
 
             return list;
@@ -68,6 +69,16 @@ namespace ProjectTDS.Managers
         {
             MoneyInBag -= money;
             UpdateMoneyInfoEventHandler?.Invoke();
+        }
+
+        private bool FirstWeaponInListNull()
+        {
+            foreach (var weapon in FirearmList)
+            {
+                if (weapon == null)
+                return true;
+            }
+            return false;
         }
     }
 }
