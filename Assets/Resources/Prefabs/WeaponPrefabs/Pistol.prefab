@@ -127,7 +127,7 @@ MonoBehaviour:
   _weaponSound: {fileID: 8300000, guid: 8cb6f8f5d4a205f4cb36d9c09c41ca35, type: 3}
   _damage: 20
   _animKey: 1
-  _fireRange: 100
+  _fireRange: 75
   _fireRate: 0.25
   _reloadTime: 1.5
   _muzzlePosition: {fileID: 3189291491095830814}

@@ -181,22 +181,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca3a1c0f82b81448987444a5c4127b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstAttributeMaxLevel: 5
-  _secondAttributeMaxLevel: 5
-  _thirdAttributeMaxLevel: 5
+  _firstAttributeLevel: {x: 0, y: 0}
+  _secondAttributeLevel: {x: 0, y: 0}
+  _thirdAttributeLevel: {x: 0, y: 0}
+  _addingNumberToFirstAttribute: {x: 0, y: 0}
+  _addingNumberToSecondAttribute: {x: 0, y: 0}
+  _addingNumberToThirdAttribute: {x: 0, y: 0}
   _multiplierCost: 1.125
   <CostFirstAttribute>k__BackingField: 1000
   <CostSecondAttribute>k__BackingField: 500
   <CostThirdAttribute>k__BackingField: 500
-  _addingNumberToFirstAttribute: 10
-  _addingNumberToSecondAttribute: 0.05
-  _addingNumberToThirdAttribute: 0.05
-  _UpgradeAddingNumberToFirstAttribute: 2
-  _UpgradeAddingNumberToSecondAttribute: 0.01
-  _UpgradeAddingNumberToThirdAttribute: 0.01
-  _firstAttributeLevel: 0
-  _secondAttributeLevel: 0
-  _thirdAttributeLevel: 0
 --- !u!82 &7917316532980774390
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11923,7 +11917,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.45
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
