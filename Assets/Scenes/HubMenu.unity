@@ -781,10 +781,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2254,6 +2254,7 @@ MonoBehaviour:
   _weaponIcon: {fileID: 136706075}
   _weaponName: {fileID: 1198573256}
   _isMeleeWeapon: 1
+  _isFirearm: 0
 --- !u!114 &1142448209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2573,6 +2574,7 @@ MonoBehaviour:
   _weaponIcon: {fileID: 1666887142}
   _weaponName: {fileID: 584913345}
   _isMeleeWeapon: 0
+  _isFirearm: 1
 --- !u!114 &1222777526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2904,6 +2906,7 @@ MonoBehaviour:
   _weaponIcon: {fileID: 2120334280}
   _weaponName: {fileID: 880479582}
   _isMeleeWeapon: 0
+  _isFirearm: 1
 --- !u!1 &1321802161
 GameObject:
   m_ObjectHideFlags: 0

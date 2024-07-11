@@ -37,9 +37,9 @@ namespace ProjectTDS.UI
 
         private void UpdateWeaponBlock()
         {
-            _weaponNameText.text = _weapon.WeaponName;
-            _ammoLeftText.text = _weapon.CurrentAmmo.ToString();
+            _weaponNameText.text = _weapon.WeaponName;           
             _ammoStockText.text = _weapon.AmmoInStock.ToString();
+            _ammoLeftText.text = _weapon.CurrentAmmo.ToString();
         }
 
         private void WeaponUpdateInfo(FirearmWeaponComponent firearmWeapon)

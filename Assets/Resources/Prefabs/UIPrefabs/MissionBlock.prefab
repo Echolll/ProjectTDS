@@ -362,6 +362,7 @@ MonoBehaviour:
   _missionImage: {fileID: 7707032086532889080}
   _missionName: {fileID: 6534211381993196486}
   _missionType: {fileID: 2958674808777131023}
+  _startMission: {fileID: 2497189390497820580}
 --- !u!1 &5178213692445588551
 GameObject:
   m_ObjectHideFlags: 0

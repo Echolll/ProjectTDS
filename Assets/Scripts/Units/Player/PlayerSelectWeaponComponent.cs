@@ -68,8 +68,12 @@ namespace ProjectTDS.Unit.Player
         {           
             _weaponKeyAnim = new Dictionary<BaseWeaponComponent, int>();
 
-            foreach (var weapon in _weapons) _weaponKeyAnim.Add(weapon, GetWeaponLayerIndex(weapon.AnimKey));
-            _weaponKeyAnim.Add(_currentMelee, GetWeaponLayerIndex(_currentMelee.AnimKey));
+            foreach (var weapon in _weapons)
+            {
+                if(weapon == null) continue;
+                _weaponKeyAnim.Add(weapon, GetWeaponLayerIndex(weapon.AnimKey));
+            }
+            if(_currentMelee != null) _weaponKeyAnim.Add(_currentMelee, GetWeaponLayerIndex(_currentMelee.AnimKey));
         }
 
         private int GetWeaponLayerIndex(AnimateKey key)

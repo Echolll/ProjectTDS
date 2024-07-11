@@ -16,6 +16,8 @@ namespace ProjectTDS.UI.HubMenu
 
         [SerializeField]
         private bool _isMeleeWeapon;
+        [SerializeField]
+        private bool _isFirearm;
 
         private BaseWeaponComponent _baseWeapon;
         private MeleeWeaponComponent _meleeWeapon;
@@ -31,15 +33,18 @@ namespace ProjectTDS.UI.HubMenu
                 _baseWeapon = melee;
                 _meleeWeapon = melee;
             }
-            else if (!_isMeleeWeapon)
+            else if (weapon is FirearmWeaponComponent && _isFirearm)
             {
                 _baseWeapon = weapon;
             }
 
             if (_baseWeapon != null)
             {
-                SetBlockData(image);
-                UpdatePlayerDataEventHandler?.Invoke(_baseWeapon);
+                if (_baseWeapon == weapon)
+                {
+                    SetBlockData(image);
+                    UpdatePlayerDataEventHandler?.Invoke(_baseWeapon);
+                }
             }
         }
 

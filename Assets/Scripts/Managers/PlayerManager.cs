@@ -53,8 +53,11 @@ namespace ProjectTDS.Managers
                 if(obj is GameObject) list.Add(obj);
             }
 
-            obj = Instantiate(MeleeWeapon.gameObject);
-            if (obj is GameObject) list.Add(obj);
+            if (MeleeWeapon != null)
+            {
+                obj = Instantiate(MeleeWeapon.gameObject);
+                if (obj is GameObject) list.Add(obj);
+            }
 
             return list;
         }
@@ -79,6 +82,13 @@ namespace ProjectTDS.Managers
                 return true;
             }
             return false;
+        }
+
+        public bool CheckWeaponList()
+        {
+            if(FirearmList.Count == 0 && MeleeWeapon == null) return false;
+            else if(FirearmList.Count > 0) return true;
+            else return false;        
         }
     }
 }

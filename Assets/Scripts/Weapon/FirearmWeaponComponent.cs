@@ -52,7 +52,11 @@ namespace ProjectTDS.Weapons
         public override void OnAction()
         {         
             if (_isRealoding || Time.time < _nextTimeToFire || !gameObject.activeSelf) return;
-            if (_currentAmmoInMag <= 0) Relaod();
+            if (_currentAmmoInMag <= 0)
+            {
+                Relaod();
+                return;
+            }
 
             _nextTimeToFire = Time.time + _fireRate;
 

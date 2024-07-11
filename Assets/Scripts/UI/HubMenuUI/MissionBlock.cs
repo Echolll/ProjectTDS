@@ -12,6 +12,8 @@ namespace ProjectTDS.UI.HubMenu
         private TextMeshProUGUI _missionName;
         [SerializeField]
         private TextMeshProUGUI _missionType;
+        [SerializeField]
+        private Button _startMission;
 
         private string _sceneName;
 
@@ -25,8 +27,9 @@ namespace ProjectTDS.UI.HubMenu
 
         public void StartMission_UnityEvent()
         {
-            SceneLoader.Instance.OnLoadScene(_sceneName, true);
+            SceneLoader.Instance.OnLoadScene(_sceneName, false);
         }
 
+        public void ButtonSwitch(bool interact) => _startMission.interactable = interact;
     }
 }

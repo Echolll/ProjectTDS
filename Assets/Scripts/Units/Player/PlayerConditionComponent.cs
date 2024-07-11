@@ -20,14 +20,14 @@ namespace ProjectTDS.Unit.Player
         public void OnArmorRepair(float repairPoints)
         {
             _currentArmorPoints += repairPoints;
-            Mathf.Clamp(_currentArmorPoints, 0, _maxArmorPoints);
+            if (_currentArmorPoints > _maxArmorPoints) _currentArmorPoints = _maxArmorPoints;
             UpdateConditionDataEventHandler?.Invoke();
         }
 
         public void OnHealthRepair(float repairPoints)
         {
             _currentHealthPoints += repairPoints;
-            Mathf.Clamp(_currentHealthPoints, 0, _maxHealthPoints);
+            if (_currentHealthPoints > _maxHealthPoints) _currentHealthPoints = _maxHealthPoints;
             UpdateConditionDataEventHandler?.Invoke();
         }
 

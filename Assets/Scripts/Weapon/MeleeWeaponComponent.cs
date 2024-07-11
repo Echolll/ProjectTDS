@@ -17,6 +17,11 @@ namespace ProjectTDS.Weapons
             base.OnEnable();
         }
 
+        private void OnDisable()
+        {
+            IsAttacking = false;
+        }
+
         public override void OnAction()
         {
             if (IsAttacking) return;
