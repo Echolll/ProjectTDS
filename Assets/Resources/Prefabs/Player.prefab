@@ -1916,8 +1916,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7058130938759831470}
   serializedVersion: 4
-  m_Mass: 15
-  m_Drag: 1.5
+  m_Mass: 12.5
+  m_Drag: 4
   m_AngularDrag: 0.25
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2081,7 +2081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealthPoints: 200
   _maxArmorPoints: 200
-  _moveSpeed: 3
+  _moveSpeed: 5
   _currentHealthPoints: 0
   _currentArmorPoints: 0
 --- !u!114 &7774984071918527704

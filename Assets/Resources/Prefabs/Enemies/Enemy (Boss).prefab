@@ -12026,9 +12026,9 @@ MonoBehaviour:
   <PatrollingPoints>k__BackingField: []
   <MinPauseDuration>k__BackingField: 0
   <MaxPauseDuration>k__BackingField: 0
-  <LossPlayerDuration>k__BackingField: 0
-  <FireDistance>k__BackingField: 7
-  _abilityCountdown: 30
+  <LossPlayerDuration>k__BackingField: 15
+  <FireDistance>k__BackingField: 8
+  _abilityCountdown: 20
 --- !u!114 &1150940490374430484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12041,7 +12041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d23f4eaa630b94695bfbe854b2f018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 10
+  _radius: 20
   _angle: 360
   <Player>k__BackingField: {fileID: 0}
   _targetMask:
@@ -12084,7 +12084,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _summonCount: 2
-  _timeToSummon: 5
+  _timeToSummon: 4.81
   _summonsEnemies: []
 --- !u!82 &4425296957184630277
 AudioSource:

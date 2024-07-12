@@ -1138,8 +1138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealthPoints: 100
-  _maxArmorPoints: 15
-  _moveSpeed: 3
+  _maxArmorPoints: 25
+  _moveSpeed: 5
   _currentHealthPoints: 0
   _currentArmorPoints: 0
 --- !u!114 &766582329047505445
@@ -1157,8 +1157,8 @@ MonoBehaviour:
   <PatrollingPoints>k__BackingField: []
   <MinPauseDuration>k__BackingField: 0
   <MaxPauseDuration>k__BackingField: 0
-  <LossPlayerDuration>k__BackingField: 0
-  <FireDistance>k__BackingField: 7
+  <LossPlayerDuration>k__BackingField: 10
+  <FireDistance>k__BackingField: 1
 --- !u!114 &2364400676247997439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1171,8 +1171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d23f4eaa630b94695bfbe854b2f018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 10
-  _angle: 105
+  _radius: 15
+  _angle: 216
   <Player>k__BackingField: {fileID: 0}
   _targetMask:
     serializedVersion: 2

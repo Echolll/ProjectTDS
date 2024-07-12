@@ -6,7 +6,7 @@ namespace ProjectTDS.Unit.Enemy
 {
     public class EnemyFOVComponent : MonoBehaviour
     {
-        [SerializeField,Range(0, 10)]
+        [SerializeField,Range(0, 20)]
         public float _radius;
         [SerializeField,Range(0, 360)]
         public float _angle;

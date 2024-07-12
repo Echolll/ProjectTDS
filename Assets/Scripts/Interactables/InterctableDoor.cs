@@ -35,6 +35,8 @@ namespace ProjectTDS.Interactables
         private bool _doorSwitch = true;
         private MeshRenderer _panelMesh;
 
+        private Coroutine _coroutine;
+
         private void Awake() => _panelMesh = GetComponent<MeshRenderer>();
 
         public void Interactable()
@@ -59,14 +61,15 @@ namespace ProjectTDS.Interactables
         {
             _doorSwitch = !_doorSwitch;
 
+            if (_coroutine != null) return;
             if (_doorSwitch)
             {
-                StartCoroutine(SwitchDoorState(_openDoor));
+                _coroutine = StartCoroutine(SwitchDoorState(_openDoor));
                 _panelMesh.material = _openPanel;
             }
             else if (!_doorSwitch)
             {
-                StartCoroutine(SwitchDoorState(_closeDoor));
+                _coroutine = StartCoroutine(SwitchDoorState(_closeDoor));
                 _panelMesh.material = _closePanel;
             }
         }
@@ -80,6 +83,7 @@ namespace ProjectTDS.Interactables
             }
 
             _door.transform.position = _endPoint.position;
+            _coroutine = null;
         }
 
     }

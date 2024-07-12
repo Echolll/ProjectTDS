@@ -19,7 +19,7 @@ namespace ProjectTDS.Unit.Enemy.BossAbilities
         
         [Space,SerializeField,Range(1,4)]
         private int _summonCount;
-        [SerializeField, Range(5,10)]
+        [SerializeField, Range(2,5)]
         private float _timeToSummon = 5f;
 
         [Space,SerializeField]

@@ -9247,6 +9247,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7914900833297199173, guid: 444e028de0adbce4aae357cf24e0a562, type: 3}
+      propertyPath: <LossPlayerDuration>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914900833297199173, guid: 444e028de0adbce4aae357cf24e0a562, type: 3}
       propertyPath: <PatrollingPoints>k__BackingField.Array.size
       value: 2
       objectReference: {fileID: 0}

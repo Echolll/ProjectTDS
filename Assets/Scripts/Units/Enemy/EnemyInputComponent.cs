@@ -16,10 +16,10 @@ namespace ProjectTDS.Unit.Enemy
         [field : SerializeField, Range(5,10)]
         public float MaxPauseDuration { get; private set; }
 
-        [field : SerializeField, Range(3, 5), Space]
+        [field : SerializeField, Range(5, 15), Space]
         public float LossPlayerDuration { get; private set; }
 
-        [field: SerializeField, Range(3, 10), Space]
+        [field: SerializeField, Range(1, 10), Space]
         public float FireDistance { get; private set; }
 
         public EnemyFOVComponent EnemyFOV { get; private set; }
